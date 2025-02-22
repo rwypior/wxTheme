@@ -1,6 +1,7 @@
 wxTheme
 =====
 A set of customized widgets with an ability to add themes and easier language support to wxWidgets.
+The library uses themes defined in XML files to customize the looks of widgets. In future this will be migrated to CSS files.
 The project is still under development. Some controls are not yet supported, and others may not be supported fully. The goal of this project is to fully support all widgets. All support is welcome.
 
 Supported widgets (theme)
@@ -35,6 +36,13 @@ enableAuiTheming(m_mgr);
 enableStatusBarTheming(m_statusBar);
 enableMenuBarTheming(m_menubar);
 ```
+
+TODO
+=====
+Currently the high-proprity items are:
+1. Improve support for partially supported widgets
+2. Use CSS instead of XML for themes
+3. Add support for more widgets
 
 Example
 =====
