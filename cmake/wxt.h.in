@@ -1,0 +1,2 @@
+#cmakedefine WXT_WINDOWS
+#cmakedefine WXT_LINUX

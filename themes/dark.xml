@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<theme name="Dark">
+  <default>
+    <text color="#C8C8C8" />
+  </default>
+
+  <window>
+    <background color="#323232" />
+  </window>
+
+  <titlebar>
+    <background mode="dark" />
+  </titlebar>
+
+  <list>
+    <background color="#141414" />
+  </list>
+  
+  <editbox>
+    <background color="#141414" />
+    <text color="#C8C8C8" />
+    <border color="#1E1E1E" />
+    <state name="error">
+      <text color="#C82020" />
+    </state>
+    <state name="warning">
+      <text color="#C8C820" />
+    </state>
+  </editbox>
+  
+  <panel>
+    <background color="#1E1E1E" />
+  </panel>
+
+  <dockpanelheader>
+    <background color="#1E1E1E" />
+    <text color="#C8C8C8" />
+  </dockpanelheader>
+
+  <dockpanelbutton>
+    <background color="#1E1E1E" />
+    <state name="hover">
+      <background color="#282828" />
+    </state>
+  </dockpanelbutton>
+  
+  <infopanel>
+    <background color="#101010" />
+  </infopanel>
+  
+  <groupbox>
+    <background color="#1E1E1E" />
+  </groupbox>
+  
+  <label>
+    <background color="#1E1E1E" />
+    <text color="#C8C8C8" />
+  </label>
+  
+  <checkbox>
+    <background color="#1E1E1E" />
+    <text color="#C8C8C8" />
+  </checkbox>
+  
+  <hyperlink>
+    <background color="#1E1E1E" />
+    <text color="#00B4F0" />    
+  </hyperlink>
+  
+  <propertygrid>
+    <background color="#141414" />
+    <margin color="#282828" />
+    <state name="selected">
+      <background color="#505050" />
+    </state>
+  </propertygrid>
+
+  <propertygridcategory>
+    <background color="#282828" />
+    <text color="#B4B4B4" />    
+  </propertygridcategory>
+
+  <statusbar>
+    <background color="#141414" />
+  </statusbar>
+
+  <treelist>
+    <background color="#141414" />
+  </treelist>
+
+  <treectrlheader>
+    <background color="#282828" />
+    <state name="hover">
+      <background color="#505050" />
+    </state>
+  </treectrlheader>
+
+  <toolbar>
+    <background color="#141414" />
+  </toolbar>
+
+  <button>
+    <background color="#383838" />
+    <border color="#383838" />
+    <state name="hover">
+      <background color="#282828" />
+    </state>
+    <state name="pressed">
+      <background color="#3C3C3C" />
+    </state>
+    <state name ="disabled">
+      <background color="#4C4C4C" />
+    </state>
+  </button>
+  
+  <smallbutton>
+    <background color="#1E1E1E" />
+    <border color="#1E1E1E" />
+    <state name="hover">
+      <background color="#282828" />
+    </state>
+    <state name="pressed">
+      <background color="#3C3C3C" />
+    </state>
+    <state name ="disabled">
+      <background color="#4C4C4C" />
+    </state>
+  </smallbutton>
+  
+  <combobox>
+	<background color="#141414" />
+  </combobox>
+
+  <menubar>
+    <background color="#141414" />
+  </menubar>
+  
+  <menuitem>
+    <background color="#141414" />
+    <text color="#C8C8C8" />
+    <state name="active">
+      <background color="#282828" />
+    </state>
+    <state name ="selected">
+      <background color="#3C3C3C" />
+    </state>
+    <state name ="disabled">
+      <text color="#787878" />
+    </state>
+  </menuitem>
+
+  <svg>
+    <shape color="#B4B4B4" />
+  </svg>
+</theme>

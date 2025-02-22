@@ -1,0 +1,50 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: example 1.0.0\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Theme"
+msgstr "Thema"
+
+msgid "Language"
+msgstr "Sprache"
+
+msgid "An example button"
+msgstr "Eine Beispielschaltfläche"
+
+msgid "File"
+msgstr "Datei"
+
+msgid "New"
+msgstr "Neu"
+
+msgid "Open"
+msgstr "Offen"
+
+msgid "Save"
+msgstr "Speichern"
+
+msgid "Edit"
+msgstr "Bearbeiten"
+
+msgid "Undo"
+msgstr "Rückgängig"
+
+msgid "Redo"
+msgstr "Wiederherstellen"
+
+msgid "Tools"
+msgstr "Werkzeuge"
+
+msgid "Settings"
+msgstr "Einstellungen"
+
+msgid "Help"
+msgstr "Helfen"
+
+msgid "About"
+msgstr "Informationen zum Programm"
