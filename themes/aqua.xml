@@ -27,6 +27,18 @@
       <text color="#C8C820" />
     </state>
   </editbox>
+
+  <terminal>
+    <background color="#d6def0" />
+    <text color="#252f44" />
+    <border color="#acb4c5" />
+    <state name="error">
+      <text color="#C82020" />
+    </state>
+    <state name="warning">
+      <text color="#C8C820" />
+    </state>
+  </terminal>
   
   <panel>
     <background color="#d6def0" />
@@ -88,12 +100,12 @@
     <background color="#d6def0" />
   </treelist>
 
-  <treectrlheader>
+  <treelistheader>
     <background color="#97addd" />
     <state name="hover">
       <background color="#5b74ab" />
     </state>
-  </treectrlheader>
+  </treelistheader>
 
   <toolbar>
     <background color="#d6def0" />

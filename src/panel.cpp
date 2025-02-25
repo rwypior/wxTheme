@@ -43,9 +43,7 @@ namespace wxt
         Theme& theme = Theme::getInstance();
         this->SetBackgroundColour(theme.isEnabled() ? this->getPanelBackgroundColor() : this->defaultBackgroundColor);
         this->SetForegroundColour(
-            theme.isEnabled() ? 
-            either(theme.getTextColor(this->getSelector()), this->GetParent() ? this->GetParent()->GetForegroundColour() : this->defaultTextColor) : 
-            this->defaultTextColor
+            either(theme.getTextColor(this->getSelector()), this->GetParent() ? this->GetParent()->GetForegroundColour() : this->defaultTextColor)
         );
     }
 

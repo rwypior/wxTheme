@@ -41,7 +41,7 @@ mainwindow::mainwindow( wxWindow* parent, wxWindowID id, const wxString& title, 
 	m_language_combo = new wxt::ComboBox( m_panel1, wxID_ANY, _("Combo!"), wxDefaultPosition, wxDefaultSize, 0, NULL, 0 );
 	bSizer1->Add( m_language_combo, 0, wxALL|wxEXPAND, 5 );
 
-	m_refreshLanguageCombo = new wxButton( m_panel1, wxID_ANY, _("Refresh list"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_refreshLanguageCombo = new wxt::Button( m_panel1, wxID_ANY, _("Refresh list"), wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer1->Add( m_refreshLanguageCombo, 0, wxALL, 5 );
 
 
@@ -58,12 +58,15 @@ mainwindow::mainwindow( wxWindow* parent, wxWindowID id, const wxString& title, 
 	wxBoxSizer* bSizer3;
 	bSizer3 = new wxBoxSizer( wxVERTICAL );
 
-	m_staticText3 = new wxt::Label( m_panel3, wxID_ANY, _("An example button"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText3 = new wxt::Label( m_panel3, wxID_ANY, _("Example controls"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText3->Wrap( -1 );
 	bSizer3->Add( m_staticText3, 0, wxALL, 5 );
 
 	m_button1 = new wxt::Button( m_panel3, wxID_ANY, _("MyButton"), wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer3->Add( m_button1, 0, wxALL, 5 );
+
+	m_checkBox1 = new wxt::Checkbox( m_panel3, wxID_ANY, _("Check Me!"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer3->Add( m_checkBox1, 0, wxALL, 5 );
 
 
 	m_panel3->SetSizer( bSizer3 );
@@ -72,6 +75,13 @@ mainwindow::mainwindow( wxWindow* parent, wxWindowID id, const wxString& title, 
 	bSizer2->Add( m_panel3, 1, wxEXPAND | wxALL, 5 );
 
 	m_panel4 = new wxt::Panel( m_panel2, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+	wxBoxSizer* bSizer4;
+	bSizer4 = new wxBoxSizer( wxVERTICAL );
+
+
+	m_panel4->SetSizer( bSizer4 );
+	m_panel4->Layout();
+	bSizer4->Fit( m_panel4 );
 	bSizer2->Add( m_panel4, 1, wxEXPAND | wxALL, 5 );
 
 

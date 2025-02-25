@@ -14,6 +14,7 @@
 #include "wxt/combobox.h"
 #include "wxt/button.h"
 #include "wxt/panel.h"
+#include "wxt/checkbox.h"
 #include "wxt/menu.h"
 #include "wxt/dialog.h"
 #include <wx/string.h>
@@ -30,6 +31,7 @@
 #include <wx/statline.h>
 #include <wx/sizer.h>
 #include <wx/panel.h>
+#include <wx/checkbox.h>
 #include <wx/menu.h>
 #include <wx/statusbr.h>
 #include <wx/frame.h>
@@ -63,11 +65,12 @@ class mainwindow : public wxt::Frame
 		wxStaticLine* m_staticline2;
 		wxt::Label* m_language;
 		wxt::ComboBox* m_language_combo;
-		wxButton* m_refreshLanguageCombo;
+		wxt::Button* m_refreshLanguageCombo;
 		wxt::Panel* m_panel2;
 		wxt::Panel* m_panel3;
 		wxt::Label* m_staticText3;
 		wxt::Button* m_button1;
+		wxt::Checkbox* m_checkBox1;
 		wxt::Panel* m_panel4;
 		wxt::MenuBar* m_menubar;
 		wxMenu* file;

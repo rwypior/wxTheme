@@ -12,6 +12,10 @@ namespace wxt
 	class MenuBar : public Control, public wxMenuBar
 	{
 	public:
+		static constexpr char MenuType[] = "menubar";
+		static constexpr char MenuItemType[] = "menuitem";
+
+	public:
 		class MenuBarRenderer
 		{
 		public:

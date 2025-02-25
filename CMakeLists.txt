@@ -11,6 +11,8 @@ project ("wxTheme")
 add_library(wxTheme)
 add_library(wxTheme::wxTheme ALIAS wxTheme)
 
+set(WXT_EXT_TERMINALCTRL OFF CACHE BOOL "Include styles for TerminalCtrl")
+
 if(WXT_PLATFORM STREQUAL "windows")
     set(WXT_WINDOWS 1)
 elseif(WXT_PLATFORM STREQUAL "linux")
@@ -33,6 +35,11 @@ add_subdirectory("example")
 find_package(wxWidgets CONFIG REQUIRED COMPONENTS core base html)
 
 target_link_libraries(wxTheme PUBLIC wx::core wx::base)
+
+if(${WXT_EXT_TERMINALCTRL})
+    find_package(wxterminal CONFIG REQUIRED)
+    target_link_libraries(wxTheme PUBLIC wxterminal::wxterminal)
+endif()
 
 if("${WXT_PLATFORM}" STREQUAL "windows")
     target_link_libraries(wxTheme PRIVATE "dwmapi.lib")
@@ -65,6 +72,12 @@ install(
 install(
         DIRECTORY "include/"
         DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"
+)
+
+install(
+        DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/include/"
+        DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"
+        FILES_MATCHING PATTERN "*.h"
 )
 
 install(EXPORT wxThemeTargets

@@ -1,4 +1,5 @@
 #include "wxt/toolbar.h"
+#include "wxt/utils.h"
 
 #include <wx/wx.h>
 #include <wx/dataview.h>
@@ -52,9 +53,8 @@ namespace wxt
     void Toolbar::processTheme()
     {
         Theme& theme = Theme::getInstance();
-        this->SetBackgroundColour(theme.isEnabled() ? *theme.getBackgroundColor(this->selector) : this->defaultBackgroundColor);
-        this->SetForegroundColour(theme.isEnabled() ? *theme.getTextColor(this->selector) : this->defaultTextColor);
-
+        this->SetBackgroundColour(either(theme.getBackgroundColor(this->selector), this->defaultBackgroundColor));
+        this->SetForegroundColour(either(theme.getTextColor(this->selector), this->defaultTextColor));
     }
 
     void Toolbar::eventThemeChanged(ThemeEvent& event)

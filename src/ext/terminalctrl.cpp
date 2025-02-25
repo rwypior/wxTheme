@@ -1,4 +1,4 @@
-#include "wxt/text.h"
+#include "wxt/ext/terminalctrl.h"
 #include "wxt/utils.h"
 
 namespace
@@ -17,38 +17,38 @@ namespace
 
 namespace wxt
 {
-    TextCtrl::TextCtrl()
-        : wxTextCtrl()
+    Terminal::Terminal()
+        : TerminalCtrl()
     {
         this->setup();
     }
 
-    TextCtrl::TextCtrl(wxWindow* parent, wxWindowID id,
+    Terminal::Terminal(wxWindow* parent, wxWindowID id,
         const wxString& value,
         const wxPoint& pos,
         const wxSize& size,
         long style,
         const wxValidator& validator,
         const wxString& name)
-        : wxTextCtrl(parent, id, value, pos, size, getStyle(style), validator, name)
+        : TerminalCtrl(parent, id, value, pos, size, getStyle(style), validator, name)
     {
         this->setup();
     }
 
-    Selector TextCtrl::getSelector() const
+    Selector Terminal::getSelector() const
     {
         return this->selector;
     }
 
-    void TextCtrl::setup()
+    void Terminal::setup()
     {
         this->selector.type = TextType;
 
         this->defaultBackgroundColor = this->GetBackgroundColour();
         this->defaultTextColor = this->GetForegroundColour();
 
-        this->Bind(wxtEVT_THEME_CHANGED, &TextCtrl::eventThemeChanged, this);
-        this->Bind(wxEVT_NC_PAINT, &TextCtrl::eventNcPaint, this);
+        this->Bind(wxtEVT_THEME_CHANGED, &Terminal::eventThemeChanged, this);
+        this->Bind(wxEVT_NC_PAINT, &Terminal::eventNcPaint, this);
 
         Theme& theme = Theme::getInstance();
         if (theme.isEnabled())
@@ -57,7 +57,7 @@ namespace wxt
         }
     }
 
-    void TextCtrl::processTheme()
+    void Terminal::processTheme()
     {
         Theme& theme = Theme::getInstance();
         this->SetBackgroundColour(theme.isEnabled() ? either(theme.getBackgroundColor(this->selector), this->defaultBackgroundColor) : this->defaultBackgroundColor);
@@ -68,7 +68,7 @@ namespace wxt
         this->SetDefaultStyle(attr);
     }
 
-    void TextCtrl::eventNcPaint(wxNcPaintEvent& event)
+    void Terminal::eventNcPaint(wxNcPaintEvent& event)
     {
         Theme& theme = Theme::getInstance();
         if (theme.isEnabled())
@@ -81,7 +81,7 @@ namespace wxt
         }
     }
 
-    void TextCtrl::eventThemeChanged(ThemeEvent& event)
+    void Terminal::eventThemeChanged(ThemeEvent& event)
     {
         this->processTheme();
     }

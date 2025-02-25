@@ -154,4 +154,9 @@ namespace wxt
     {
         this->selector.type = SmallButtonType;
     }
+
+    Selector SmallButton::getSelector() const
+    {
+        return this->selector;
+    }
 }

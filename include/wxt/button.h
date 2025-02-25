@@ -59,7 +59,7 @@ namespace wxt
     class SmallButton : public Button
     {
     public:
-        static constexpr char SmallButtonType[] = "smbutton";
+        static constexpr char SmallButtonType[] = "smallbutton";
 
     public:
         SmallButton(wxWindow* parent,
@@ -70,6 +70,8 @@ namespace wxt
             long style = 0,
             const wxValidator& validator = wxDefaultValidator,
             const wxString& name = wxASCII_STR(wxButtonNameStr));
+
+        virtual Selector getSelector() const override;
     };
 }
 

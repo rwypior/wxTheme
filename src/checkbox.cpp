@@ -2,6 +2,12 @@
 
 namespace wxt
 {
+    Checkbox::Checkbox()
+        : wxCheckBox()
+    {
+        this->setup();
+    }
+
     Checkbox::Checkbox(wxWindow* parent,
         wxWindowID id,
         const wxString& label,
@@ -15,12 +21,12 @@ namespace wxt
         this->originalLabel = label;
 
         this->setup();
-
-        this->selector.type = CheckboxType;
     }
 
     void Checkbox::setup()
     {
+        this->selector.type = CheckboxType;
+
         this->Bind(wxtEVT_THEME_CHANGED, &Checkbox::eventThemeChanged, this);
         this->Bind(wxtEVT_LANGUAGE_CHANGED, &Checkbox::eventLanguageChanged, this);
 

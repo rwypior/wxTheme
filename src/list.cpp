@@ -21,6 +21,11 @@ namespace wxt
         this->setup();
     }
 
+    Selector List::getSelector() const
+    {
+        return this->selector;
+    }
+
     void List::setup()
     {
         this->selector.type = ListType;
@@ -134,6 +139,11 @@ namespace wxt
         : wxListBox(parent, id, pos, size, choices, style, validator, name)
     {
         this->setup();
+    }
+
+    Selector ListBox::getSelector() const
+    {
+        return this->selector;
     }
 
     void ListBox::setup()

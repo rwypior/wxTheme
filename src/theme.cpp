@@ -28,7 +28,7 @@ namespace wxt
 
 	Theme::Theme()
 	{
-		this->defaultSelector.type = "default";
+		this->defaultSelector.type = DefaultType;
 		this->reloadStyle();
 	}
 
@@ -65,6 +65,10 @@ namespace wxt
 			return {};
 
 		wxString val = this->getValue(selector.type, "text", "color", translateState(state));
+
+		if (val.empty())
+			val = this->getValue(DefaultType, "text", "color", translateState(state));
+
 		if (val.empty())
 			return {};
 
@@ -215,7 +219,7 @@ namespace wxt
 		return "";
 	}
 
-	wxString Theme::getValue(const wxString& element, const wxString& property, const wxString& attribute, const wxString& state)
+	wxString Theme::getValue(const wxString& element, const wxString& property, const wxString& attribute, const wxString& state, bool strict)
 	{
 		wxXmlNode* node = this->theme.GetRoot()->GetChildren();
 
@@ -241,7 +245,12 @@ namespace wxt
 					}
 
 					if (!found)
-						return "";
+					{
+						if (strict)
+							return "";
+						else
+							return this->getValue(element, property, attribute, "", true);
+					}
 
 					node = node->GetChildren();
 				}

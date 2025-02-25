@@ -80,8 +80,8 @@ namespace wxt
 
     void MenuBar::setup()
     {
-        this->selector.type = "menubar";
-        this->selectorItem.type = "menuitem";
+        this->selector.type = MenuType;
+        this->selectorItem.type = MenuItemType;
 
         this->Bind(wxtEVT_LANGUAGE_CHANGED, &MenuBar::eventLanguageChanged, this);
     }

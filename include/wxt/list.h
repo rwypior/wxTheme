@@ -30,6 +30,8 @@ namespace wxt
             const wxValidator& validator = wxDefaultValidator,
             const wxString& name = wxASCII_STR(wxListCtrlNameStr));
 
+        virtual Selector getSelector() const override;
+
     protected:
         void setup();
         void processTheme();
@@ -69,6 +71,8 @@ namespace wxt
             long style = 0,
             const wxValidator& validator = wxDefaultValidator,
             const wxString& name = wxASCII_STR(wxListBoxNameStr));
+
+        virtual Selector getSelector() const override;
 
     protected:
         void setup();

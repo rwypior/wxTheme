@@ -1,21 +1,22 @@
-#pragma once
+#ifndef _h_wxtheme_wxterminal
+#define _h_wxtheme_wxterminal
 
-#include "control.h"
-#include "theme.h"
+#include "wxt/text.h"
 
-#include <wx/wx.h>
-#include <wx/aui/aui.h>
+#include <wxterminal/terminalCtrl.h>
 
 namespace wxt
 {
-    class TextCtrl : public Control, public wxTextCtrl
-    {
+    // TODO - this is almost exact copy of TextCtrl. This needs to be refactored.
+
+	class Terminal : public Control, public TerminalCtrl
+	{
     public:
-        static constexpr char TextType[] = "editbox";
+        static constexpr char TextType[] = "terminal";
 
     public:
-        TextCtrl();
-        TextCtrl(wxWindow* parent, wxWindowID id,
+        Terminal();
+        Terminal(wxWindow* parent, wxWindowID id,
             const wxString& value = wxEmptyString,
             const wxPoint& pos = wxDefaultPosition,
             const wxSize& size = wxDefaultSize,
@@ -38,5 +39,7 @@ namespace wxt
 
         wxColour defaultBackgroundColor;
         wxColour defaultTextColor;
-    };
+	};
 }
+
+#endif

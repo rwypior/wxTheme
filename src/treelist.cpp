@@ -1,4 +1,5 @@
 #include "wxt/treelist.h"
+#include "wxt/utils.h"
 
 #include <wx/wx.h>
 #include <wx/dataview.h>
@@ -31,6 +32,11 @@ namespace wxt
         return this->selector;
     }
 
+    Selector TreeList::getSelectorHeader() const
+    {
+        return this->selectorHeader;
+    }
+
     void TreeList::setup()
     {
         this->selector.type = TreeListType;
@@ -59,8 +65,8 @@ namespace wxt
     void TreeList::processTheme()
     {
         Theme& theme = Theme::getInstance();
-        this->SetBackgroundColour(theme.isEnabled() ? *theme.getBackgroundColor(this->getSelector()) : this->defaultBackgroundColor);
-        this->SetForegroundColour(theme.isEnabled() ? *theme.getTextColor(this->getSelector()) : this->defaultTextColor);
+        this->SetBackgroundColour(either(theme.getBackgroundColor(this->getSelector()), this->defaultBackgroundColor));
+        this->SetForegroundColour(either(theme.getTextColor(this->getSelector()), this->defaultTextColor));
     }
 
     void TreeList::eventThemeChanged(ThemeEvent& event)
@@ -77,7 +83,8 @@ namespace wxt
 
             wxRect rect = this->GetClientRect();
             dc.SetBrush(*wxTRANSPARENT_BRUSH);
-            dc.SetPen(wxPen(*theme.getBackgroundColor(this->getSelector()), 3));
+            if (auto color = theme.getBackgroundColor(this->getSelector()))
+                dc.SetPen(wxPen(*color, 3));
             dc.DrawRectangle(rect);
         }
     }
@@ -112,7 +119,9 @@ namespace wxt
             {
                 wxString label = this->m_view->GetColumn(0)->GetTitle();
                 wxSize extent = dc.GetTextExtent(label);
-                dc.SetTextForeground(*theme.getTextColor(this->getSelectorHeader()));
+
+                if (auto color = theme.getTextColor(this->getSelectorHeader()))
+                    dc.SetTextForeground(*color);
                 dc.DrawText(label, 8, rect.height / 2 - extent.GetHeight() / 2);
             }
         }

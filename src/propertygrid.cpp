@@ -80,24 +80,24 @@ namespace wxt
     {
         Theme& theme = Theme::getInstance();
 
-        m_colEmptySpace = theme.isEnabled() ? *theme.getBackgroundColor(this->getSelector()) : this->defaultColEmptySpace;
-        m_colLine = theme.isEnabled() ? *theme.getBorderColor(this->getSelector()) : this->defaultColLine;
-        m_colMargin = theme.isEnabled() ? *theme.getMarginColor(this->getSelector()) : this->defaultColMargin;
+        m_colEmptySpace = either(theme.getBackgroundColor(this->getSelector()), this->defaultColEmptySpace);
+        m_colLine = either(theme.getBorderColor(this->getSelector()), this->defaultColLine);
+        m_colMargin = either(theme.getMarginColor(this->getSelector()), this->defaultColMargin);
 
-        m_colPropBack = theme.isEnabled() ? *theme.getBackgroundColor(this->getSelector()) : this->defaultColPropBack;
-        m_colPropFore = theme.isEnabled() ? *theme.getTextColor(this->getSelector()) : this->defaultColPropFore;
+        m_colPropBack = either(theme.getBackgroundColor(this->getSelector()), this->defaultColPropBack);
+        m_colPropFore = either(theme.getTextColor(this->getSelector()), this->defaultColPropFore);
 
-        m_colSelBack = theme.isEnabled() ? *theme.getBackgroundColor(this->getSelector(), Theme::State::Selected) : this->defaultColSelBack;
-        m_colSelFore = theme.isEnabled() ? *theme.getTextColor(this->getSelector(), Theme::State::Selected) : this->defaultColSelFore;
+        m_colSelBack = either(theme.getBackgroundColor(this->getSelector(), Theme::State::Selected), this->defaultColSelBack);
+        m_colSelFore = either(theme.getTextColor(this->getSelector(), Theme::State::Selected), this->defaultColSelFore);
 
-        m_propertyDefaultCell.SetBgCol(theme.isEnabled() ? *theme.getBackgroundColor(this->getSelector()) : this->defaultPropertyDefaultCellBack);
-        m_propertyDefaultCell.SetFgCol(theme.isEnabled() ? *theme.getTextColor(this->getSelector()) : this->defaultPropertyDefaultCellFore);
+        m_propertyDefaultCell.SetBgCol(either(theme.getBackgroundColor(this->getSelector()), this->defaultPropertyDefaultCellBack));
+        m_propertyDefaultCell.SetFgCol(either(theme.getTextColor(this->getSelector()), this->defaultPropertyDefaultCellFore));
 
-        m_categoryDefaultCell.SetBgCol(theme.isEnabled() ? *theme.getBackgroundColor(this->getSelectorCategory()) : this->defaultCategoryDefaultCellBack);
-        m_categoryDefaultCell.SetFgCol(theme.isEnabled() ? *theme.getTextColor(this->getSelectorCategory()) : this->defaultCategoryDefaultCellFore);
+        m_categoryDefaultCell.SetBgCol(either(theme.getBackgroundColor(this->getSelectorCategory()), this->defaultCategoryDefaultCellBack));
+        m_categoryDefaultCell.SetFgCol(either(theme.getTextColor(this->getSelectorCategory()), this->defaultCategoryDefaultCellFore));
 
-        this->SetBackgroundColour(theme.isEnabled() ? *theme.getBackgroundColor(this->getSelector()) : this->defaultBackgroundColor);
-        this->SetForegroundColour(theme.isEnabled() ? *theme.getTextColor(this->getSelector()) : this->defaultForegroundColor);
+        this->SetBackgroundColour(either(theme.getBackgroundColor(this->getSelector()), this->defaultBackgroundColor));
+        this->SetForegroundColour(either(theme.getTextColor(this->getSelector()), this->defaultForegroundColor));
 
         Refresh();
         Update();

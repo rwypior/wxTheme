@@ -94,6 +94,7 @@ namespace wxt
     {
         this->statusbarManager.registerStatusBar(statusBar);
         this->statusbarManager.setup();
+        this->statusbarManager.applyTheme();
     }
 
     void Frame::enableMenuBarTheming(MenuBar* menuBar)
@@ -310,7 +311,7 @@ namespace wxt
         {
             wxPaintDC dc(this);
 
-            if (auto bg = theme.getBackgroundColor(this->getSelector(), Theme::State::Pressed))
+            if (auto bg = theme.getBackgroundColor(this->getSelector()))
                 dc.SetBrush(wxBrush(*bg));
 
             wxSize size = dc.GetSize();

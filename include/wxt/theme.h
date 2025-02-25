@@ -40,30 +40,7 @@ namespace wxt
 	class Theme
 	{
 	public:
-		/*enum class Element
-		{
-			Window,
-			Titlebar,
-			Panel,
-			DockPanelHeader,
-			DockPanelButton,
-			InfoPanel,
-			Label,
-			Hyperlink,
-			TextCtrl,
-			List,
-			Checkbox,
-			PropertyGrid,
-			PropertyGridCategory,
-			StatusBar,
-			Groupbox,
-			TreeCtrl,
-			TreeCtrlHeader,
-			Button,
-			SmallButton,
-			MenuBar,
-			MenuItem
-		};*/
+		static constexpr char DefaultType[] = "default";
 
 		enum class Property
 		{
@@ -118,7 +95,7 @@ namespace wxt
 		static wxString translateState(State state);
 
 	protected:
-		wxString getValue(const wxString& element, const wxString& property, const wxString& attribute, const wxString& state = "");
+		wxString getValue(const wxString& element, const wxString& property, const wxString& attribute, const wxString& state = "", bool strict = false);
 
 	private:
 		Selector defaultSelector;
