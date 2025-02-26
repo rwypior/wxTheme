@@ -24,8 +24,8 @@ namespace wxt
     class DataViewTreeCtrl : public Control, public wxDataViewTreeCtrl
     {
     public:
-        static constexpr char DataViewTreeType[] = "treectrl";
-        static constexpr char DataViewTreeHeaderType[] = "treectrlheader";
+        static constexpr char DataViewTreeType[] = "dataviewtree";
+        static constexpr char DataViewTreeHeaderType[] = "dataviewtreeheader";
 
     public:
         DataViewTreeCtrl();

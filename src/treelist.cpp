@@ -99,18 +99,19 @@ namespace wxt
 
             wxRect rect = this->headerCtrl->GetClientRect();
 
-            wxColour backgroundColor;
+            std::optional<wxColour> backgroundColor;
 
             if (this->headerCtrl->IsMouseInWindow())
             {
-                backgroundColor = *theme.getBackgroundColor(this->getSelectorHeader(), Theme::State::Hover);
+                backgroundColor = theme.getBackgroundColor(this->getSelectorHeader(), Theme::State::Hover);
             }
             else
             {
-                backgroundColor = *theme.getBackgroundColor(this->getSelectorHeader());
+                backgroundColor = theme.getBackgroundColor(this->getSelectorHeader());
             }
 
-            dc.SetBrush(wxBrush(backgroundColor));
+            if (backgroundColor)
+                dc.SetBrush(wxBrush(*backgroundColor));
             dc.SetPen(*wxTRANSPARENT_PEN);
 
             dc.DrawRectangle(rect);
