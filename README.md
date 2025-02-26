@@ -13,6 +13,7 @@ Supported widgets (theme)
 - wxPanel
 - wxPropertyGrid
 - wxTextCtrl
+- [wxWidgetsTerminalCtrl](https://github.com/rwypior/wxWidgetsTerminalCtrl) (optionally)
 - wxTreeListCtrl
 - Status bar
 - Window title bar (Windows only)
