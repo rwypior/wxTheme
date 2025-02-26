@@ -30,8 +30,8 @@ namespace wxt
         void processLanguage();
 
     private:
-        void eventThemeChanged(ThemeEvent& event) override;
-        void eventLanguageChanged(LanguageEvent& event) override;
+        void eventThemeChanged(ThemeEvent& event);
+        void eventLanguageChanged(LanguageEvent& event);
 
     private:
         wxString originalLabel;

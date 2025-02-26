@@ -16,7 +16,7 @@ mainwindow::mainwindow( wxWindow* parent, wxWindowID id, const wxString& title, 
 	m_mgr.SetFlags(wxAUI_MGR_DEFAULT);
 
 	m_panel1 = new wxt::Panel( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
-	m_mgr.AddPane( m_panel1, wxAuiPaneInfo() .Left() .PinButton( true ).Dock().Resizable().FloatingSize( wxDefaultSize ).BestSize( wxSize( 250,-1 ) ) );
+	m_mgr.AddPane( m_panel1, wxAuiPaneInfo() .Left() .Caption( _("Theme") ).PinButton( true ).Dock().Resizable().FloatingSize( wxDefaultSize ).BestSize( wxSize( 250,-1 ) ) );
 
 	wxBoxSizer* bSizer1;
 	bSizer1 = new wxBoxSizer( wxVERTICAL );
@@ -77,6 +77,16 @@ mainwindow::mainwindow( wxWindow* parent, wxWindowID id, const wxString& title, 
 	m_panel4 = new wxt::Panel( m_panel2, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	wxBoxSizer* bSizer4;
 	bSizer4 = new wxBoxSizer( wxVERTICAL );
+
+	m_panel5 = new wxPanel( m_panel4, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+	wxStaticBoxSizer* sbSizer1;
+	sbSizer1 = new wxStaticBoxSizer( new wxStaticBox( m_panel5, wxID_ANY, _("label") ), wxVERTICAL );
+
+
+	m_panel5->SetSizer( sbSizer1 );
+	m_panel5->Layout();
+	sbSizer1->Fit( m_panel5 );
+	bSizer4->Add( m_panel5, 1, wxEXPAND | wxALL, 5 );
 
 
 	m_panel4->SetSizer( bSizer4 );

@@ -41,8 +41,8 @@ namespace wxt
         void eventPaint(wxPaintEvent& event);
         void eventNcPaint(wxNcPaintEvent& event);
 
-        virtual void eventThemeChanged(ThemeEvent& event) override;
-        virtual void eventLanguageChanged(LanguageEvent& event) override;
+        void eventThemeChanged(ThemeEvent& event);
+        void eventLanguageChanged(LanguageEvent& event);
 
     private:
         Selector selector;
@@ -81,7 +81,7 @@ namespace wxt
     private:
         void eventNcPaint(wxNcPaintEvent& event);
 
-        virtual void eventThemeChanged(ThemeEvent& event) override;
+        void eventThemeChanged(ThemeEvent& event);
 
     private:
         Selector selector;

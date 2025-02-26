@@ -94,6 +94,7 @@ namespace wxt
 			language = wxLANGUAGE_ENGLISH;
 		}
 
+		wxTranslations::Set(nullptr); // Fixes possible crashes on AddCatalog
 		this->locale = std::make_unique<wxLocale>(language);
 		
 		for (const wxString& path : this->lookupPaths)
@@ -101,12 +102,8 @@ namespace wxt
 			this->locale->AddCatalogLookupPathPrefix(path);
 		}
 		
-		if (!this->locale->IsLoaded(catalog))
-		{
-			// TODO - this seems to crash randomly, need to find the fix
-			if (!this->locale->AddCatalog(catalog))
-				result = false;
-		}
+		if (!this->locale->AddCatalog(catalog))
+			result = false;
 
 		if (!this->locale->IsOk())
 			result = false;

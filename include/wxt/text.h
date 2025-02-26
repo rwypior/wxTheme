@@ -31,7 +31,7 @@ namespace wxt
 
     private:
         void eventNcPaint(wxNcPaintEvent& event);
-        void eventThemeChanged(ThemeEvent& event) override;
+        void eventThemeChanged(ThemeEvent& event);
 
     private:
         Selector selector;

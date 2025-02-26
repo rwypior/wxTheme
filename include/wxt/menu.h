@@ -11,6 +11,8 @@ namespace wxt
 {
 	class MenuBar : public Control, public wxMenuBar
 	{
+		friend class Frame;
+
 	public:
 		static constexpr char MenuType[] = "menubar";
 		static constexpr char MenuItemType[] = "menuitem";
@@ -49,7 +51,7 @@ namespace wxt
 	private:
 		void processLanguage();
 
-		virtual void eventLanguageChanged(LanguageEvent& event) override;
+		void eventLanguageChanged(LanguageEvent& event);
 
 	private:
 		Selector selector;

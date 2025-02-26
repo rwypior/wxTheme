@@ -81,6 +81,7 @@ namespace wxt
         this->dockPanelButtonSelector.type = DockPanelButtonType;
 
         this->Bind(wxtEVT_THEME_CHANGED, &Frame::eventThemeChanged, this);
+        this->Bind(wxtEVT_LANGUAGE_CHANGED, &Frame::eventLanguageChanged, this);
 
         this->processTheme();
     }
@@ -100,6 +101,11 @@ namespace wxt
     void Frame::enableMenuBarTheming(MenuBar* menuBar)
     {
         this->themedMenu = menuBar;
+    }
+
+    void Frame::enableMenuBarLanguage(MenuBar* menuBar)
+    {
+        this->translatedMenu = menuBar;
     }
 
     Selector Frame::getTitlebarSelector() const
@@ -152,9 +158,20 @@ namespace wxt
 #endif
     }
 
+    void Frame::processLanguage()
+    {
+        if (this->translatedMenu)
+            this->translatedMenu->processLanguage();
+    }
+
     void Frame::eventThemeChanged(ThemeEvent& event)
     {
         this->processTheme();
+    }
+
+    void Frame::eventLanguageChanged(LanguageEvent& event)
+    {
+        this->processLanguage();
     }
 
     void Frame::eventAuiRender(wxAuiManagerEvent& event)
@@ -289,19 +306,44 @@ namespace wxt
         : wxDialog(parent, id, title, pos, size, style, name)
     {
         this->selector.type = DialogType;
+        this->titlebarSelector.type = Frame::TitlebarType;
 
-        Theme& theme = Theme::getInstance();
-        if (theme.isEnabled())
-        {
-            BOOL value = TRUE;
-            DwmSetWindowAttribute(this->GetHWND(), DWMWA_USE_IMMERSIVE_DARK_MODE, &value, sizeof(value));
-            this->Bind(wxEVT_PAINT, &Dialog::eventPaint, this);
-        }
+        this->Bind(wxtEVT_THEME_CHANGED, &Dialog::eventThemeChanged, this);
+        this->Bind(wxEVT_PAINT, &Dialog::eventPaint, this);
+
+        this->processTheme();
     }
 
     Selector Dialog::getSelector() const
     {
         return this->selector;
+    }
+
+    Selector Dialog::getTitlebarSelector() const
+    {
+        return this->titlebarSelector;
+    }
+
+    void Dialog::processTheme()
+    {
+#ifdef WXT_WINDOWS
+        BOOL themeEnabled = FALSE;
+
+        Theme& theme = Theme::getInstance();
+        if (theme.isEnabled() && theme.getMode(this->getTitlebarSelector()) == "dark")
+        {
+            themeEnabled = TRUE;
+        }
+        this->SetThemeEnabled(themeEnabled);
+        DwmSetWindowAttribute(this->GetHWND(), DWMWA_USE_IMMERSIVE_DARK_MODE, &themeEnabled, sizeof(themeEnabled));
+
+        this->updateNc();
+#endif
+    }
+
+    void Dialog::eventThemeChanged(ThemeEvent& event)
+    {
+        this->processTheme();
     }
 
     void Dialog::eventPaint(wxPaintEvent& event)
@@ -516,6 +558,12 @@ namespace wxt
         //}
 
         return wxDialog::MSWWindowProc(message, wParam, lParam);
+    }
+
+    void Dialog::updateNc()
+    {
+        SendMessage(GetHWND(), WM_NCACTIVATE, FALSE, FALSE);
+        SendMessage(GetHWND(), WM_NCACTIVATE, TRUE, FALSE);
     }
 #endif
 }

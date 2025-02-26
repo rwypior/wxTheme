@@ -31,8 +31,8 @@ namespace wxt
         void processLanguage();
 
     private:
-        virtual void eventThemeChanged(ThemeEvent& event) override;
-        virtual void eventLanguageChanged(LanguageEvent& event) override;
+        void eventThemeChanged(ThemeEvent& event);
+        void eventLanguageChanged(LanguageEvent& event);
 
     protected:
         Selector selector;

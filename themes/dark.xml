@@ -96,16 +96,16 @@
     <background color="#141414" />
   </statusbar>
 
-  <treelist>
+  <treectrl>
     <background color="#141414" />
-  </treelist>
+  </treectrl>
 
-  <treelistheader>
+  <treectrlheader>
     <background color="#282828" />
     <state name="hover">
       <background color="#505050" />
     </state>
-  </treelistheader>
+  </treectrlheader>
 
   <toolbar>
     <background color="#141414" />

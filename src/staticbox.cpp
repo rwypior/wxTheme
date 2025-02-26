@@ -1,4 +1,5 @@
 #include "wxt/staticbox.h"
+#include "wxt/utils.h"
 
 namespace wxt
 {
@@ -43,8 +44,8 @@ namespace wxt
     void StaticBox::processTheme()
     {
         Theme& theme = Theme::getInstance();
-        this->SetBackgroundColour(theme.isEnabled() ? *theme.getBackgroundColor(this->getSelector()) : this->defaultBackgroundColor);
-        this->SetForegroundColour(theme.isEnabled() ? *theme.getTextColor(this->getSelector()) : this->defaultTextColor);
+        this->SetBackgroundColour(either(theme.getBackgroundColor(this->getSelector()), this->defaultBackgroundColor));
+        this->SetForegroundColour(either(theme.getTextColor(this->getSelector()), this->defaultTextColor));
     }
 
     void StaticBox::processLanguage()

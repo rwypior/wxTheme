@@ -44,8 +44,8 @@ namespace wxt
     private:
         void eventPaint(wxPaintEvent& event);
         void eventNcPaint(wxNcPaintEvent& event);
-        void eventThemeChanged(ThemeEvent& event) override;
-        void eventLanguageChanged(LanguageEvent& event) override;
+        void eventThemeChanged(ThemeEvent& event);
+        void eventLanguageChanged(LanguageEvent& event);
 
     private:
         wxString emptyMessage;

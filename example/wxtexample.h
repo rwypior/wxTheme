@@ -32,6 +32,7 @@
 #include <wx/sizer.h>
 #include <wx/panel.h>
 #include <wx/checkbox.h>
+#include <wx/statbox.h>
 #include <wx/menu.h>
 #include <wx/statusbr.h>
 #include <wx/frame.h>
@@ -72,6 +73,7 @@ class mainwindow : public wxt::Frame
 		wxt::Button* m_button1;
 		wxt::Checkbox* m_checkBox1;
 		wxt::Panel* m_panel4;
+		wxPanel* m_panel5;
 		wxt::MenuBar* m_menubar;
 		wxMenu* file;
 		wxMenu* edit;

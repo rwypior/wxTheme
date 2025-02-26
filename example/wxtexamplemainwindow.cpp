@@ -21,6 +21,7 @@ wxtexamplemainwindow::wxtexamplemainwindow( wxWindow* parent )
 	this->enableAuiTheming(this->m_mgr);
 	this->enableStatusBarTheming(this->m_statusBar);
 	this->enableMenuBarTheming(this->m_menubar);
+	this->enableMenuBarLanguage(this->m_menubar);
 }
 
 void wxtexamplemainwindow::reloadThemeCombo()

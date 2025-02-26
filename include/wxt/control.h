@@ -12,10 +12,6 @@ namespace wxt
 	{
 	public:
 		virtual Selector getSelector() const = 0;
-		
-	protected:
-		virtual void eventThemeChanged(ThemeEvent& event) {}
-		virtual void eventLanguageChanged(LanguageEvent& event) {}
 	};
 }
 

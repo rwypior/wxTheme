@@ -29,7 +29,7 @@ namespace wxt
         void processTheme();
 
     private:
-        void eventThemeChanged(ThemeEvent& event) override;
+        void eventThemeChanged(ThemeEvent& event);
         void eventPaint(wxPaintEvent& event);
 
         Selector selector;

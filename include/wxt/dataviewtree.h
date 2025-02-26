@@ -43,7 +43,7 @@ namespace wxt
         void processTheme();
 
     private:
-        virtual void eventThemeChanged(ThemeEvent& event) override;
+        void eventThemeChanged(ThemeEvent& event);
 
         void eventNcPaint(wxNcPaintEvent& event);
 

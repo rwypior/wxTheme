@@ -39,6 +39,7 @@ namespace wxt
 
 		void setDefaultLanguage(const wxString& lang);
 
+		// Returns list of available languages in std::pair<path, name>
 		wxVector<std::pair<wxString, wxString>> getAvailableLanguages(bool useNativeNames = false);
 
 	private:
