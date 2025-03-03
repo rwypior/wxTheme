@@ -62,6 +62,7 @@
   
   <groupbox>
     <background color="#1E1E1E" />
+    <border color="#383838" />
   </groupbox>
   
   <label>

@@ -62,6 +62,7 @@
   
   <groupbox>
     <background color="#d6def0" />
+    <border color="#acb5c9" />
   </groupbox>
   
   <label>
@@ -124,7 +125,7 @@
 
   <button>
     <background color="#acb5c9" />
-	<text color="#252f44" />
+	  <text color="#252f44" />
     <border color="#1c2a48" />
     <state name="hover">
       <background color="#8d96a9" />

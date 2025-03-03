@@ -17,6 +17,7 @@
 #include "wxt/checkbox.h"
 #include "wxt/menu.h"
 #include "wxt/dialog.h"
+#include "wxt/staticbox.h"
 #include <wx/string.h>
 #include <wx/stattext.h>
 #include <wx/gdicmn.h>

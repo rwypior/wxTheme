@@ -80,7 +80,7 @@ mainwindow::mainwindow( wxWindow* parent, wxWindowID id, const wxString& title, 
 
 	m_panel5 = new wxPanel( m_panel4, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	wxStaticBoxSizer* sbSizer1;
-	sbSizer1 = new wxStaticBoxSizer( new wxStaticBox( m_panel5, wxID_ANY, _("label") ), wxVERTICAL );
+	sbSizer1 = new wxStaticBoxSizer( new wxt::StaticBox( m_panel5, wxID_ANY, _("label") ), wxVERTICAL );
 
 
 	m_panel5->SetSizer( sbSizer1 );

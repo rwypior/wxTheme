@@ -34,6 +34,7 @@ namespace wxt
         this->defaultBackgroundColor = this->GetBackgroundColour();
         this->defaultTextColor = this->GetForegroundColour();
 
+        this->Bind(wxEVT_NC_PAINT, &StaticBox::eventNcPaint, this);
         this->Bind(wxtEVT_THEME_CHANGED, &StaticBox::eventThemeChanged, this);
         this->Bind(wxtEVT_LANGUAGE_CHANGED, &StaticBox::eventLanguageChanged, this);
 
@@ -46,11 +47,42 @@ namespace wxt
         Theme& theme = Theme::getInstance();
         this->SetBackgroundColour(either(theme.getBackgroundColor(this->getSelector()), this->defaultBackgroundColor));
         this->SetForegroundColour(either(theme.getTextColor(this->getSelector()), this->defaultTextColor));
+
+        Refresh();
+        Update();
     }
 
     void StaticBox::processLanguage()
     {
         this->SetLabel(translate(this->originalLabel));
+    }
+
+    void StaticBox::eventNcPaint(wxNcPaintEvent& event)
+    {
+        Theme& theme = Theme::getInstance();
+        if (theme.isEnabled())
+        {
+            wxWindowDC dc(this);
+
+            if (auto borderColor = theme.getBorderColor(this->getSelector()))
+            {
+                wxSize ext = dc.GetTextExtent(this->GetLabel());
+
+                wxRect rct = this->GetClientRect();
+                int top = rct.GetTop() + ext.GetHeight() / 2;
+                int labelLeft = 7;
+                int labelRight = labelLeft + 4;
+                int bottom = rct.GetBottom() - 1;
+
+                dc.SetPen(wxPen(*borderColor));
+
+                dc.DrawLine({ rct.GetLeft(), top}, {labelLeft, top});
+                dc.DrawLine({ labelRight + ext.GetWidth(), top}, {rct.GetRight(), top});
+                dc.DrawLine({ rct.GetRight(), top}, {rct.GetRight(), bottom + 1});
+                dc.DrawLine({ rct.GetRight(), bottom }, { rct.GetLeft(), bottom });
+                dc.DrawLine({ rct.GetLeft(), bottom }, { rct.GetLeft(), top });
+            }
+        }
     }
 
     void StaticBox::eventThemeChanged(ThemeEvent& event)

@@ -30,6 +30,7 @@ namespace wxt
         void processLanguage();
 
     private:
+        void eventNcPaint(wxNcPaintEvent& event);
         void eventThemeChanged(ThemeEvent& event);
         void eventLanguageChanged(LanguageEvent& event);
 

@@ -18,6 +18,7 @@ if(WXT_PLATFORM STREQUAL "windows")
 elseif(WXT_PLATFORM STREQUAL "linux")
     set(WXT_LINUX 1)
 endif()
+
 set_property(TARGET wxTheme PROPERTY CXX_STANDARD 17)
 
 configure_file("cmake/wxt.h.in" "include/wxt/wxt.h" @ONLY)
@@ -90,6 +91,11 @@ install(FILES
             "${CMAKE_CURRENT_BINARY_DIR}/wxTheme/wxThemeConfig.cmake" 
             "${CMAKE_CURRENT_BINARY_DIR}/wxTheme/wxThemeConfigVersion.cmake"
         DESTINATION ${ConfigPackageLocation}
+)
+
+install(FILES 
+            "cmake/patchFbpCode.cmake"
+        DESTINATION ${ConfigPackageLocation}/util
 )
 
 export(PACKAGE wxTheme)
