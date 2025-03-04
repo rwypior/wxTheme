@@ -153,8 +153,13 @@
   </smallbutton>
   
   <combobox>
-	<background color="#141414" />
+	  <background color="#141414" />
   </combobox>
+
+  <comboboxbutton>
+    <background color="#383838" />
+    <text color="#696969" />
+  </comboboxbutton>
 
   <menubar>
     <background color="#141414" />

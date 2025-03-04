@@ -12,7 +12,8 @@ namespace wxt
     class ComboBox : public Control, public wxComboBox
     {
     public:
-        static constexpr char ButtonType[] = "combobox";
+        static constexpr char ComboboxType[] = "combobox";
+        static constexpr char ComboboxButtonType[] = "comboboxbutton";
 
     public:
         ComboBox(wxWindow* parent, wxWindowID id,
@@ -34,6 +35,9 @@ namespace wxt
             const wxString& name = wxASCII_STR(wxComboBoxNameStr));
 
         virtual Selector getSelector() const override;
+        Selector getSelectorButton() const;
+
+        wxRect getButtonRect();
 
     protected:
         void setup();
@@ -41,10 +45,12 @@ namespace wxt
         void processTheme();
 
     private:
+        void eventPaint(wxPaintEvent& event);
         void eventThemeChanged(ThemeEvent& event);
 
     private:
         Selector selector;
+        Selector selectorbutton;
 
         wxColour defaultBackgroundColor;
         wxColour defaultTextColor;

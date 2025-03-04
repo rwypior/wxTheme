@@ -81,6 +81,8 @@ namespace wxt
 
 		std::optional<wxColour> getColor(Selector selector, Property property, State state);
 
+		wxString getValue(const wxString& element, const wxString& property, const wxString& attribute, const wxString& state = "", bool strict = false);
+
 		Selector getDefaultSelector() const;
 
 		void refreshRecursively(wxWindow* pWindow);
@@ -93,9 +95,6 @@ namespace wxt
 		wxString getThemePath(const wxString& themename);
 
 		static wxString translateState(State state);
-
-	protected:
-		wxString getValue(const wxString& element, const wxString& property, const wxString& attribute, const wxString& state = "", bool strict = false);
 
 	private:
 		Selector defaultSelector;
