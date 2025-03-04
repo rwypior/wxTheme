@@ -13,6 +13,7 @@
 #include "wxt/label.h"
 #include "wxt/combobox.h"
 #include "wxt/button.h"
+#include "wxt/staticline.h"
 #include "wxt/panel.h"
 #include "wxt/checkbox.h"
 #include "wxt/propertygrid.h"
@@ -66,7 +67,7 @@ class mainwindow : public wxt::Frame
 		wxt::Label* m_theme;
 		wxt::ComboBox* m_theme_combo;
 		wxt::Button* m_refreshThemeCombo;
-		wxStaticLine* m_staticline2;
+		wxt::StaticLine* m_staticline2;
 		wxt::Label* m_language;
 		wxt::ComboBox* m_language_combo;
 		wxt::Button* m_refreshLanguageCombo;

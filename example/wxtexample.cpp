@@ -7,6 +7,8 @@
 
 #include "wxtexample.h"
 #include "wxt/staticbox.h"
+#include "wxt/staticbox.h"
+#include "wxt/staticbox.h"
 
 ///////////////////////////////////////////////////////////////////////////
 
@@ -32,7 +34,7 @@ mainwindow::mainwindow( wxWindow* parent, wxWindowID id, const wxString& title, 
 	m_refreshThemeCombo = new wxt::Button( m_panel1, wxID_ANY, _("Refresh list"), wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer1->Add( m_refreshThemeCombo, 0, wxALL, 5 );
 
-	m_staticline2 = new wxStaticLine( m_panel1, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL );
+	m_staticline2 = new wxt::StaticLine( m_panel1, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL );
 	bSizer1->Add( m_staticline2, 0, wxEXPAND | wxALL, 5 );
 
 	m_language = new wxt::Label( m_panel1, wxID_ANY, _("Language"), wxDefaultPosition, wxDefaultSize, 0 );

@@ -179,6 +179,10 @@
     </state>
   </menuitem>
 
+  <line>
+    <background color="#383838" />
+  </line>
+
   <svg>
     <shape color="#B4B4B4" />
   </svg>

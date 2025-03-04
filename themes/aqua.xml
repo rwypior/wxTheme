@@ -82,6 +82,7 @@
   
   <propertygrid>
     <background color="#d6def0" />
+    <border color="#849ac9" />
     <margin color="#849ac9" />
     <state name="selected">
       <background color="#505050" />
@@ -168,7 +169,11 @@
     </state>
   </menuitem>
 
+  <line>
+    <background color="#383838" />
+  </line>
+  
   <svg>
-    <shape color="#4e78d0" />
+    <shape color="#acb5c9" />
   </svg>
 </theme>
