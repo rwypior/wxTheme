@@ -45,6 +45,7 @@ namespace wxt
     void StaticBox::processTheme()
     {
         Theme& theme = Theme::getInstance();
+        auto dupsko = theme.getTextColor(this->getSelector());
         this->SetBackgroundColour(either(theme.getBackgroundColor(this->getSelector()), this->defaultBackgroundColor));
         this->SetForegroundColour(either(theme.getTextColor(this->getSelector()), this->defaultTextColor));
 

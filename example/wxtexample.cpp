@@ -6,6 +6,7 @@
 ///////////////////////////////////////////////////////////////////////////
 
 #include "wxtexample.h"
+#include "wxt/staticbox.h"
 
 ///////////////////////////////////////////////////////////////////////////
 
@@ -93,6 +94,19 @@ mainwindow::mainwindow( wxWindow* parent, wxWindowID id, const wxString& title, 
 	m_panel4->Layout();
 	bSizer4->Fit( m_panel4 );
 	bSizer2->Add( m_panel4, 1, wxEXPAND | wxALL, 5 );
+
+	m_panel6 = new wxt::Panel( m_panel2, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+	wxBoxSizer* bSizer5;
+	bSizer5 = new wxBoxSizer( wxVERTICAL );
+
+	m_propertyGrid1 = new wxt::PropertyGrid(m_panel6, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxPG_DEFAULT_STYLE);
+	bSizer5->Add( m_propertyGrid1, 1, wxALL|wxEXPAND, 5 );
+
+
+	m_panel6->SetSizer( bSizer5 );
+	m_panel6->Layout();
+	bSizer5->Fit( m_panel6 );
+	bSizer2->Add( m_panel6, 1, wxEXPAND | wxALL, 5 );
 
 
 	m_panel2->SetSizer( bSizer2 );

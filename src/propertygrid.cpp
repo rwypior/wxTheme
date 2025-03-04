@@ -8,7 +8,7 @@ namespace
         wxt::Theme& theme = wxt::Theme::getInstance();
         if (theme.isEnabled())
         {
-            //style |= wxNO_BORDER;
+            style |= wxNO_BORDER;
         }
 
         return style;
@@ -89,7 +89,7 @@ namespace wxt
 
         m_colSelBack = either(theme.getBackgroundColor(this->getSelector(), Theme::State::Selected), this->defaultColSelBack);
         m_colSelFore = either(theme.getTextColor(this->getSelector(), Theme::State::Selected), this->defaultColSelFore);
-
+        
         m_propertyDefaultCell.SetBgCol(either(theme.getBackgroundColor(this->getSelector()), this->defaultPropertyDefaultCellBack));
         m_propertyDefaultCell.SetFgCol(either(theme.getTextColor(this->getSelector()), this->defaultPropertyDefaultCellFore));
 
@@ -195,9 +195,14 @@ namespace wxt
         {
             wxWindowDC dc(this);
 
-            wxRect rect = this->GetRect();
+            int border = getWidgetBorder(*this);
+
+            wxRect rect = this->GetClientRect();
+            rect.height += border;
+            rect.width += border;
+
             dc.SetBrush(*wxTRANSPARENT_BRUSH);
-            dc.SetPen(wxPen(*theme.getBackgroundColor(this->getSelector()), 3));
+            dc.SetPen(wxPen(*theme.getBackgroundColor(this->getSelector()), border));
             dc.DrawRectangle(rect);
         }
     }

@@ -72,12 +72,12 @@ namespace wxt
 		void disable();
 		bool isEnabled();
 
-		std::optional<wxColour> getBackgroundColor(Selector selector, State state = State::Default);
-		std::optional<wxColour> getTextColor(Selector selector, State state = State::Default);
-		std::optional<wxColour> getBorderColor(Selector selector, State state = State::Default);
-		std::optional<wxColour> getMarginColor(Selector selector, State state = State::Default);
+		std::optional<wxColour> getBackgroundColor(Selector selector, State state = State::Default, bool useDefault = true);
+		std::optional<wxColour> getTextColor(Selector selector, State state = State::Default, bool useDefault = true);
+		std::optional<wxColour> getBorderColor(Selector selector, State state = State::Default, bool useDefault = true);
+		std::optional<wxColour> getMarginColor(Selector selector, State state = State::Default, bool useDefault = true);
 		std::optional<wxColour> getIconColor();
-		std::optional<wxString> getMode(Selector selector, State state = State::Default);
+		std::optional<wxString> getMode(Selector selector, State state = State::Default, bool useDefault = true);
 
 		std::optional<wxColour> getColor(Selector selector, Property property, State state);
 

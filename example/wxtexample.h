@@ -15,9 +15,9 @@
 #include "wxt/button.h"
 #include "wxt/panel.h"
 #include "wxt/checkbox.h"
+#include "wxt/propertygrid.h"
 #include "wxt/menu.h"
 #include "wxt/dialog.h"
-#include "wxt/staticbox.h"
 #include <wx/string.h>
 #include <wx/stattext.h>
 #include <wx/gdicmn.h>
@@ -34,6 +34,8 @@
 #include <wx/panel.h>
 #include <wx/checkbox.h>
 #include <wx/statbox.h>
+#include <wx/propgrid/propgrid.h>
+#include <wx/propgrid/advprops.h>
 #include <wx/menu.h>
 #include <wx/statusbr.h>
 #include <wx/frame.h>
@@ -75,6 +77,8 @@ class mainwindow : public wxt::Frame
 		wxt::Checkbox* m_checkBox1;
 		wxt::Panel* m_panel4;
 		wxPanel* m_panel5;
+		wxt::Panel* m_panel6;
+		wxt::PropertyGrid* m_propertyGrid1;
 		wxt::MenuBar* m_menubar;
 		wxMenu* file;
 		wxMenu* edit;
@@ -84,7 +88,7 @@ class mainwindow : public wxt::Frame
 
 	public:
 
-		mainwindow( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("wxTheme example"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 858,524 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
+		mainwindow( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("wxTheme example"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 1137,524 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
 		wxAuiManager m_mgr;
 
 		~mainwindow();

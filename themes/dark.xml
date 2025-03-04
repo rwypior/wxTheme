@@ -82,6 +82,7 @@
   
   <propertygrid>
     <background color="#141414" />
+    <border color="#282828" />
     <margin color="#282828" />
     <state name="selected">
       <background color="#505050" />

@@ -12,6 +12,8 @@ namespace wxt
 	{
 	public:
 		virtual Selector getSelector() const = 0;
+
+		static int getWidgetBorder(wxWindow& window);
 	};
 }
 

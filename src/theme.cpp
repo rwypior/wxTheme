@@ -47,54 +47,58 @@ namespace wxt
 		return this->enabled;
 	}
 
-	std::optional<wxColour> Theme::getBackgroundColor(Selector selector, State state)
+	std::optional<wxColour> Theme::getBackgroundColor(Selector selector, State state, bool useDefault)
 	{
 		if (!this->isEnabled())
 			return {};
 
-		wxString val = this->getValue(selector.type, "background", "color", translateState(state));
+		auto s = translateState(state);
+		wxString val = this->getValue(selector.type, "background", "color", s);
+
 		if (val.empty())
-			return {};
+			return useDefault ? this->getValue(DefaultType, "background", "color", s) : std::optional<wxColour>{};
 
 		return wxColour(val);
 	}
 
-	std::optional<wxColour> Theme::getTextColor(Selector selector, State state)
+	std::optional<wxColour> Theme::getTextColor(Selector selector, State state, bool useDefault)
 	{
 		if (!this->isEnabled())
 			return {};
 
-		wxString val = this->getValue(selector.type, "text", "color", translateState(state));
+		auto s = translateState(state);
+		wxString val = this->getValue(selector.type, "text", "color", s);
 
 		if (val.empty())
-			val = this->getValue(DefaultType, "text", "color", translateState(state));
-
-		if (val.empty())
-			return {};
+			return useDefault ? this->getValue(DefaultType, "text", "color", s) : std::optional<wxColour>{};
 
 		return wxColour(val);
 	}
 
-	std::optional<wxColour> Theme::getBorderColor(Selector selector, State state)
+	std::optional<wxColour> Theme::getBorderColor(Selector selector, State state, bool useDefault)
 	{
 		if (!this->isEnabled())
 			return {};
 
-		wxString val = this->getValue(selector.type, "border", "color", translateState(state));
+		auto s = translateState(state);
+		wxString val = this->getValue(selector.type, "border", "color", s);
+
 		if (val.empty())
-			return {};
+			return useDefault ? this->getValue(DefaultType, "border", "color", s) : std::optional<wxColour>{};
 
 		return wxColour(val);
 	}
 
-	std::optional<wxColour> Theme::getMarginColor(Selector selector, State state)
+	std::optional<wxColour> Theme::getMarginColor(Selector selector, State state, bool useDefault)
 	{
 		if (!this->isEnabled())
 			return {};
 
-		wxString val = this->getValue(selector.type, "margin", "color", translateState(state));
+		auto s = translateState(state);
+		wxString val = this->getValue(selector.type, "margin", "color", s);
+
 		if (val.empty())
-			return {};
+			return useDefault ? this->getValue(DefaultType, "margin", "color", s) : std::optional<wxColour>{};
 
 		return wxColour(val);
 	}
@@ -111,14 +115,16 @@ namespace wxt
 		return wxColour(val);
 	}
 
-	std::optional<wxString> Theme::getMode(Selector selector, State state)
+	std::optional<wxString> Theme::getMode(Selector selector, State state, bool useDefault)
 	{
 		if (!this->isEnabled())
 			return {};
 
-		wxString val = this->getValue(selector.type, "background", "mode", translateState(state));
+		auto s = translateState(state);
+		wxString val = this->getValue(selector.type, "background", "mode", s);
+
 		if (val.empty())
-			return {};
+			return useDefault ? this->getValue(DefaultType, "background", "mode", s) : std::optional<wxString>{};
 
 		return val;
 	}

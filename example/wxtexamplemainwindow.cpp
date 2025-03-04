@@ -15,6 +15,10 @@ wxtexamplemainwindow::wxtexamplemainwindow( wxWindow* parent )
 	this->m_theme_combo->Bind(wxEVT_COMBOBOX, &wxtexamplemainwindow::handlerThemeCombo, this);
 	this->m_language_combo->Bind(wxEVT_COMBOBOX, &wxtexamplemainwindow::handlerLanguageCombo, this);
 
+	this->m_propertyGrid1->Append(new wxStringProperty("Example item"));
+	this->m_propertyGrid1->Append(new wxStringProperty("Another item"));
+	this->m_propertyGrid1->Append(new wxStringProperty("Something else"));
+
 	this->reloadThemeCombo();
 	this->reloadLanguageCombo();
 
