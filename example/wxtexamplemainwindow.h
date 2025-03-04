@@ -23,6 +23,8 @@ private:
 	void handlerRefreshLanguages(wxCommandEvent& event);
 	void handlerThemeCombo(wxCommandEvent& event);
 	void handlerLanguageCombo(wxCommandEvent& event);
+
+	void handlerButton1(wxCommandEvent& event);
 };
 
 #endif // __wxtexamplemainwindow__

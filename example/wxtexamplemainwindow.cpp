@@ -15,6 +15,8 @@ wxtexamplemainwindow::wxtexamplemainwindow( wxWindow* parent )
 	this->m_theme_combo->Bind(wxEVT_COMBOBOX, &wxtexamplemainwindow::handlerThemeCombo, this);
 	this->m_language_combo->Bind(wxEVT_COMBOBOX, &wxtexamplemainwindow::handlerLanguageCombo, this);
 
+	this->m_button1->Bind(wxEVT_BUTTON, &wxtexamplemainwindow::handlerButton1, this);
+
 	this->m_propertyGrid1->Append(new wxStringProperty("Example item"));
 	this->m_propertyGrid1->Append(new wxStringProperty("Another item"));
 	this->m_propertyGrid1->Append(new wxStringProperty("Something else"));
@@ -93,4 +95,10 @@ void wxtexamplemainwindow::handlerLanguageCombo(wxCommandEvent& event)
 
 	wxt::Language& lang = wxt::Language::getInstance();
 	lang.loadLanguage(languagePath, true);
+}
+
+void wxtexamplemainwindow::handlerButton1(wxCommandEvent& event)
+{
+	MyDialog1* dlg1 = new MyDialog1(this);
+	dlg1->Show();
 }

@@ -137,8 +137,8 @@ namespace wxt
         auto defaultbg = either(theme.getBackgroundColor(theme.getDefaultSelector()), this->defaultBackgroundColor);
         auto defaultfg = either(theme.getTextColor(theme.getDefaultSelector()), this->defaultTextColor);
 
-        this->SetBackgroundColour(theme.isEnabled() ? either(theme.getBackgroundColor(this->getSelector()), defaultbg) : this->defaultBackgroundColor);
-        this->SetForegroundColour(theme.isEnabled() ? either(theme.getTextColor(this->getSelector()), defaultfg) : this->defaultTextColor);
+        this->SetOwnBackgroundColour(theme.isEnabled() ? either(theme.getBackgroundColor(this->getSelector()), defaultbg) : this->defaultBackgroundColor);
+        this->SetOwnForegroundColour(theme.isEnabled() ? either(theme.getTextColor(this->getSelector()), defaultfg) : this->defaultTextColor);
 
         this->statusbarManager.applyTheme();
 

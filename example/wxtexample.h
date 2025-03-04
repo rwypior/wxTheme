@@ -41,6 +41,7 @@
 #include <wx/statusbr.h>
 #include <wx/frame.h>
 #include <wx/aui/aui.h>
+#include <wx/dialog.h>
 
 ///////////////////////////////////////////////////////////////////////////
 
@@ -95,6 +96,28 @@ class mainwindow : public wxt::Frame
 		wxAuiManager m_mgr;
 
 		~mainwindow();
+
+};
+
+///////////////////////////////////////////////////////////////////////////////
+/// Class MyDialog1
+///////////////////////////////////////////////////////////////////////////////
+class MyDialog1 : public wxt::Dialog
+{
+	private:
+
+	protected:
+		wxt::Panel* m_panel7;
+		wxt::Label* m_staticText4;
+		wxt::Panel* m_panel8;
+		wxt::Panel* m_panel9;
+		wxt::Button* m_button4;
+
+	public:
+
+		MyDialog1( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 584,378 ), long style = wxDEFAULT_DIALOG_STYLE );
+
+		~MyDialog1();
 
 };
 

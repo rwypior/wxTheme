@@ -41,8 +41,8 @@ namespace wxt
     void Panel::processTheme()
     {
         Theme& theme = Theme::getInstance();
-        this->SetBackgroundColour(theme.isEnabled() ? this->getPanelBackgroundColor() : this->defaultBackgroundColor);
-        this->SetForegroundColour(
+        this->SetOwnBackgroundColour(theme.isEnabled() ? this->getPanelBackgroundColor() : this->defaultBackgroundColor);
+        this->SetOwnForegroundColour(
             either(theme.getTextColor(this->getSelector()), this->GetParent() ? this->GetParent()->GetForegroundColour() : this->defaultTextColor)
         );
     }

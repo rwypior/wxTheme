@@ -30,7 +30,7 @@ namespace wxt
     void StaticBox::setup()
     {
         this->selector.type = StaticBoxType;
-
+        
         this->defaultBackgroundColor = this->GetBackgroundColour();
         this->defaultTextColor = this->GetForegroundColour();
 
@@ -45,9 +45,8 @@ namespace wxt
     void StaticBox::processTheme()
     {
         Theme& theme = Theme::getInstance();
-        auto dupsko = theme.getTextColor(this->getSelector());
-        this->SetBackgroundColour(either(theme.getBackgroundColor(this->getSelector()), this->defaultBackgroundColor));
-        this->SetForegroundColour(either(theme.getTextColor(this->getSelector()), this->defaultTextColor));
+        this->SetOwnBackgroundColour(either(theme.getBackgroundColor(this->getSelector()), this->defaultBackgroundColor));
+        this->SetOwnForegroundColour(either(theme.getTextColor(this->getSelector()), this->defaultTextColor));
 
         Refresh();
         Update();

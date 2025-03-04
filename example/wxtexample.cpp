@@ -6,6 +6,7 @@
 ///////////////////////////////////////////////////////////////////////////
 
 #include "wxtexample.h"
+#include "wxt/staticbox.h"
 
 ///////////////////////////////////////////////////////////////////////////
 
@@ -90,7 +91,7 @@ mainwindow::mainwindow( wxWindow* parent, wxWindowID id, const wxString& title, 
 
 	m_panel5 = new wxPanel( m_panel4, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	wxStaticBoxSizer* sbSizer1;
-	sbSizer1 = new wxStaticBoxSizer( new wxStaticBox( m_panel5, wxID_ANY, _("label") ), wxVERTICAL );
+	sbSizer1 = new wxStaticBoxSizer( new wxt::StaticBox( m_panel5, wxID_ANY, _("label") ), wxVERTICAL );
 
 
 	m_panel5->SetSizer( sbSizer1 );
@@ -174,4 +175,59 @@ mainwindow::~mainwindow()
 {
 	m_mgr.UnInit();
 
+}
+
+MyDialog1::MyDialog1( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxt::Dialog( parent, id, title, pos, size, style )
+{
+	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
+
+	wxBoxSizer* bSizer6;
+	bSizer6 = new wxBoxSizer( wxHORIZONTAL );
+
+	m_panel7 = new wxt::Panel( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+	wxBoxSizer* bSizer7;
+	bSizer7 = new wxBoxSizer( wxVERTICAL );
+
+	m_staticText4 = new wxt::Label( m_panel7, wxID_ANY, _("An example dialog"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText4->Wrap( -1 );
+	bSizer7->Add( m_staticText4, 0, wxALL, 5 );
+
+
+	m_panel7->SetSizer( bSizer7 );
+	m_panel7->Layout();
+	bSizer7->Fit( m_panel7 );
+	bSizer6->Add( m_panel7, 1, wxEXPAND | wxALL, 5 );
+
+	m_panel8 = new wxt::Panel( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+	wxBoxSizer* bSizer8;
+	bSizer8 = new wxBoxSizer( wxVERTICAL );
+
+	m_panel9 = new wxt::Panel( m_panel8, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+	wxStaticBoxSizer* sbSizer2;
+	sbSizer2 = new wxStaticBoxSizer( new wxt::StaticBox( m_panel9, wxID_ANY, _("Static box") ), wxVERTICAL );
+
+	m_button4 = new wxt::Button( sbSizer2->GetStaticBox(), wxID_ANY, _("Example button"), wxDefaultPosition, wxDefaultSize, 0 );
+	sbSizer2->Add( m_button4, 0, wxALL, 5 );
+
+
+	m_panel9->SetSizer( sbSizer2 );
+	m_panel9->Layout();
+	sbSizer2->Fit( m_panel9 );
+	bSizer8->Add( m_panel9, 1, wxEXPAND | wxALL, 5 );
+
+
+	m_panel8->SetSizer( bSizer8 );
+	m_panel8->Layout();
+	bSizer8->Fit( m_panel8 );
+	bSizer6->Add( m_panel8, 1, wxEXPAND | wxALL, 5 );
+
+
+	this->SetSizer( bSizer6 );
+	this->Layout();
+
+	this->Centre( wxBOTH );
+}
+
+MyDialog1::~MyDialog1()
+{
 }
