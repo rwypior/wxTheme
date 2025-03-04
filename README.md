@@ -15,6 +15,7 @@ Supported widgets (theme)
 - wxTextCtrl
 - [wxWidgetsTerminalCtrl](https://github.com/rwypior/wxWidgetsTerminalCtrl) (optionally)
 - wxTreeListCtrl
+- wxStaticLine
 - Status bar
 - Window title bar (Windows only)
 - AUI (partial)
@@ -25,6 +26,7 @@ Supported widgets (theme)
 - wxHyperlinkCtrl (partial)
 - wxStaticBox (partial)
 - wxToolBar (partial)
+- wxComboBox (partial)
 
 Usage
 =====
@@ -49,5 +51,6 @@ Example
 =====
 The project provides an example project showing basic usage of the library.
 
-![wxtheme1](https://github.com/user-attachments/assets/acb0f011-f313-49e9-beb9-9d830b0a04e8)
-![wxtheme2](https://github.com/user-attachments/assets/f201c722-50b5-407d-8f09-cc1dd0baa7bb)
+![wxtheme1](https://github.com/user-attachments/assets/815cf1dd-a838-4c0c-b45e-0a9e834ceec6)
+![wxtheme2](https://github.com/user-attachments/assets/6acfa887-d427-4be5-a178-adb97f1fc361)
+
