@@ -71,6 +71,8 @@ class mainwindow : public wxt::Frame
 		wxt::Label* m_language;
 		wxt::ComboBox* m_language_combo;
 		wxt::Button* m_refreshLanguageCombo;
+		wxt::StaticLine* m_staticline21;
+		wxt::ComboBox* m_example_combo;
 		wxt::Panel* m_panel2;
 		wxt::Panel* m_panel3;
 		wxt::Label* m_staticText3;

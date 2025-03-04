@@ -6,9 +6,6 @@
 ///////////////////////////////////////////////////////////////////////////
 
 #include "wxtexample.h"
-#include "wxt/staticbox.h"
-#include "wxt/staticbox.h"
-#include "wxt/staticbox.h"
 
 ///////////////////////////////////////////////////////////////////////////
 
@@ -47,6 +44,16 @@ mainwindow::mainwindow( wxWindow* parent, wxWindowID id, const wxString& title, 
 	m_refreshLanguageCombo = new wxt::Button( m_panel1, wxID_ANY, _("Refresh list"), wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer1->Add( m_refreshLanguageCombo, 0, wxALL, 5 );
 
+	m_staticline21 = new wxt::StaticLine( m_panel1, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL );
+	bSizer1->Add( m_staticline21, 0, wxEXPAND | wxALL, 5 );
+
+	m_example_combo = new wxt::ComboBox( m_panel1, wxID_ANY, _("Combo!"), wxDefaultPosition, wxDefaultSize, 0, NULL, wxCB_READONLY );
+	m_example_combo->Append( _("Choice A") );
+	m_example_combo->Append( _("Choice B") );
+	m_example_combo->Append( _("Choice C") );
+	m_example_combo->SetSelection( 0 );
+	bSizer1->Add( m_example_combo, 0, wxALL|wxEXPAND, 5 );
+
 
 	m_panel1->SetSizer( bSizer1 );
 	m_panel1->Layout();
@@ -83,7 +90,7 @@ mainwindow::mainwindow( wxWindow* parent, wxWindowID id, const wxString& title, 
 
 	m_panel5 = new wxPanel( m_panel4, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	wxStaticBoxSizer* sbSizer1;
-	sbSizer1 = new wxStaticBoxSizer( new wxt::StaticBox( m_panel5, wxID_ANY, _("label") ), wxVERTICAL );
+	sbSizer1 = new wxStaticBoxSizer( new wxStaticBox( m_panel5, wxID_ANY, _("label") ), wxVERTICAL );
 
 
 	m_panel5->SetSizer( sbSizer1 );

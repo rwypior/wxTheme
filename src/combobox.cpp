@@ -132,6 +132,17 @@ namespace wxt
                 { buttonrect.x + buttonrect.width / 2, buttonrect.GetBottom() - 11}
             };
             dc.DrawPolygon(3, pts);
+
+            // Text
+            if (this->GetWindowStyle() & wxCB_READONLY)
+            {
+                auto val = this->GetValue();
+                if (auto color = theme.getTextColor(this->getSelector()))
+                    dc.SetTextForeground(*color);
+
+                wxSize textSize = dc.GetTextExtent(this->GetLabel());
+                dc.DrawText(val, border, border - 1);
+            }
         }
         else
             event.Skip();
