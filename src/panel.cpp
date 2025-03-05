@@ -8,10 +8,13 @@ namespace wxt
         const wxPoint& pos,
         const wxSize& size,
         long style,
-        const wxString& name)
+        const wxString& name,
+        bool performsetup)
         : wxPanel(parent, winid, pos, size, style, name)
     {
-        this->setup();
+        this->selector.type = PanelType;
+        if (performsetup)
+            this->setup();
     }
 
     Selector Panel::getSelector() const
@@ -25,21 +28,34 @@ namespace wxt
         return *theme.getBackgroundColor(this->getSelector());
     }
 
+    bool Panel::SetBackgroundColour(const wxColour& colour)
+    {
+        if (this->themeWatch)
+            return wxPanel::SetBackgroundColour(colour);
+        else
+        {
+            this->defaultBackgroundColor = colour;
+            if (!Theme::getInstance().isEnabled())
+                return wxPanel::SetBackgroundColour(colour);
+        }
+        return true;
+    }
+
     void Panel::setup()
     {
-        this->selector.type = PanelType;
-
         this->defaultBackgroundColor = this->GetBackgroundColour();
         this->defaultTextColor = this->GetForegroundColour();
 
         this->Bind(wxtEVT_THEME_CHANGED, &Panel::eventThemeChanged, this);
         this->Bind(wxEVT_PAINT, &Panel::eventPaint, this);
+        this->Bind(wxEVT_NC_PAINT, &Panel::eventNcPaint, this);
 
         this->processTheme();
     }
 
     void Panel::processTheme()
     {
+        auto watcher = this->themeWatch();
         Theme& theme = Theme::getInstance();
         this->SetOwnBackgroundColour(theme.isEnabled() ? this->getPanelBackgroundColor() : this->defaultBackgroundColor);
         this->SetOwnForegroundColour(
@@ -66,6 +82,32 @@ namespace wxt
         }
     }
 
+    void Panel::eventNcPaint(wxNcPaintEvent& event)
+    {
+        Theme& theme = Theme::getInstance();
+        if (theme.isEnabled())
+        {
+            wxWindowDC dc(this);
+
+            if (auto borderColor = theme.getBorderColor(this->getSelector()))
+            {
+                if (this->GetWindowStyle() & wxBORDER_THEME)
+                {
+                    auto borderSize = this->GetWindowBorderSize();
+                    wxRect rct = this->GetClientRect();
+                    rct.width += borderSize.x;
+                    rct.height += borderSize.y;
+
+                    dc.SetPen(wxPen(*borderColor, borderSize.x));
+                    dc.DrawLine(rct.GetRight(), rct.GetTop(), rct.GetRight(), rct.GetBottom());
+                    dc.DrawLine(rct.GetRight(), rct.GetBottom(), rct.GetLeft(), rct.GetBottom());
+                    dc.DrawLine(rct.GetLeft(), rct.GetBottom(), rct.GetLeft(), rct.GetTop());
+                    dc.DrawLine(rct.GetLeft(), rct.GetTop(), rct.GetRight(), rct.GetTop());
+                }
+            }
+        }
+    }
+
     // Info panel
 
     InfoPanel::InfoPanel(wxWindow* parent,
@@ -74,9 +116,10 @@ namespace wxt
         const wxSize& size,
         long style,
         const wxString& name)
-        : Panel(parent, winid, pos, size, style, name)
+        : Panel(parent, winid, pos, size, style, name, false)
     {
         this->selector.type = InfoPanelType;
+        this->setup();
     }
 
     Selector InfoPanel::getSelector() const

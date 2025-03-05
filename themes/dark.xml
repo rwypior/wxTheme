@@ -42,6 +42,7 @@
   
   <panel>
     <background color="#1E1E1E" />
+    <border color="#383838" />
   </panel>
 
   <dockpanelheader>
@@ -58,6 +59,7 @@
   
   <infopanel>
     <background color="#101010" />
+    <border color="#383838" />
   </infopanel>
   
   <groupbox>
@@ -66,7 +68,6 @@
   </groupbox>
   
   <label>
-    <background color="#1E1E1E" />
     <text color="#C8C8C8" />
   </label>
   

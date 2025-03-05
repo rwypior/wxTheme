@@ -40,7 +40,9 @@ namespace wxt
         Theme& theme = Theme::getInstance();
 
         auto bg = theme.getBackgroundColor(this->getSelector());
-        this->SetBackgroundColour(bg ? *bg : this->defaultBackgroundColor);
+        auto qweqwe = this->GetParent();
+        auto asdasd = this->GetParent()->GetBackgroundColour();
+        this->SetBackgroundColour(bg ? *bg : (this->GetParent() ? this->GetParent()->GetBackgroundColour() : this->defaultBackgroundColor));
 
         auto fg = theme.getTextColor(this->getSelector());
         this->SetForegroundColour(fg ? *fg : this->defaultTextColor);

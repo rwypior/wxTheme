@@ -42,6 +42,43 @@ namespace wxt
     wxPoint calcOriginPoint(const wxSize& containerSize, const wxSize& childSize);
 
     wxWindow* GetTopParent(wxWindow* pWindow);
+
+    class ScopeWatch
+    {
+    public:
+        class Watcher
+        {
+        public:
+            using Callback = std::function<void()>;
+
+            Watcher(Callback &&cb)
+                : callback(std::move(cb))
+            { }
+
+            ~Watcher()
+            {
+                callback();
+            }
+
+        private:
+            Callback callback;
+        };
+
+    public:
+        Watcher operator()()
+        {
+            this->status = true;
+            return Watcher([this]() { this->status = false; });
+        }
+
+        operator bool() const
+        {
+            return this->status;
+        }
+
+    private:
+        bool status = false;
+    };
 }
 
 // Enable bitwise operations on enum class

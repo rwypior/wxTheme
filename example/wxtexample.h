@@ -10,6 +10,9 @@
 #include <wx/artprov.h>
 #include <wx/xrc/xmlres.h>
 #include <wx/intl.h>
+namespace wxt{ class InfoPanel; }
+namespace wxt{ class Label; }
+
 #include "wxt/label.h"
 #include "wxt/combobox.h"
 #include "wxt/button.h"
@@ -112,6 +115,9 @@ class MyDialog1 : public wxt::Dialog
 		wxt::Panel* m_panel8;
 		wxt::Panel* m_panel9;
 		wxt::Button* m_button4;
+		wxt::InfoPanel* m_panel10;
+		wxt::Label* m_staticText5;
+		wxt::Label* m_staticText6;
 
 	public:
 

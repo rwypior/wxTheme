@@ -2,6 +2,7 @@
 
 #include "control.h"
 #include "theme.h"
+#include "utils.h"
 
 #include <wx/wx.h>
 #include <wx/aui/aui.h>
@@ -19,10 +20,13 @@ namespace wxt
             const wxPoint& pos = wxDefaultPosition,
             const wxSize& size = wxDefaultSize,
             long style = wxTAB_TRAVERSAL | wxNO_BORDER,
-            const wxString& name = wxASCII_STR(wxPanelNameStr));
+            const wxString& name = wxASCII_STR(wxPanelNameStr),
+            bool performsetup = true);
 
         virtual Selector getSelector() const override;
         virtual wxColour getPanelBackgroundColor() const;
+
+        virtual bool SetBackgroundColour(const wxColour& colour) override;
 
     protected:
         void setup();
@@ -31,11 +35,14 @@ namespace wxt
     private:
         void eventThemeChanged(ThemeEvent& event);
         void eventPaint(wxPaintEvent& event);
+        void eventNcPaint(wxNcPaintEvent& event);
 
         Selector selector;
 
         wxColour defaultBackgroundColor;
         wxColour defaultTextColor;
+
+        ScopeWatch themeWatch;
     };
 
     class InfoPanel : public Panel

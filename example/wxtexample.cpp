@@ -5,7 +5,18 @@
 // PLEASE DO *NOT* EDIT THIS FILE!
 ///////////////////////////////////////////////////////////////////////////
 
+#include "wxt/label.h"
+#include "wxt/staticbox.h"
+#include "wxt/staticbox.h"
+#include "wxt/staticbox.h"
+#include "wxt/panel.h"
+#include "wxt/staticbox.h"
+#include "wxt/staticbox.h"
+#include "wxt/staticbox.h"
+
 #include "wxtexample.h"
+#include "wxt/staticbox.h"
+#include "wxt/staticbox.h"
 #include "wxt/staticbox.h"
 
 ///////////////////////////////////////////////////////////////////////////
@@ -208,6 +219,26 @@ MyDialog1::MyDialog1( wxWindow* parent, wxWindowID id, const wxString& title, co
 
 	m_button4 = new wxt::Button( sbSizer2->GetStaticBox(), wxID_ANY, _("Example button"), wxDefaultPosition, wxDefaultSize, 0 );
 	sbSizer2->Add( m_button4, 0, wxALL, 5 );
+
+	m_panel10 = new wxt::InfoPanel( sbSizer2->GetStaticBox(), wxID_ANY, wxDefaultPosition, wxDefaultSize, wxBORDER_THEME|wxTAB_TRAVERSAL );
+	m_panel10->SetBackgroundColour( wxSystemSettings::GetColour( wxSYS_COLOUR_INFOBK ) );
+
+	wxBoxSizer* bSizer9;
+	bSizer9 = new wxBoxSizer( wxVERTICAL );
+
+	m_staticText5 = new wxt::Label( m_panel10, wxID_ANY, _("MyLabel"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText5->Wrap( -1 );
+	bSizer9->Add( m_staticText5, 0, wxALL|wxEXPAND, 5 );
+
+	m_staticText6 = new wxt::Label( m_panel10, wxID_ANY, _("MyLabel"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText6->Wrap( -1 );
+	bSizer9->Add( m_staticText6, 0, wxALL|wxEXPAND, 5 );
+
+
+	m_panel10->SetSizer( bSizer9 );
+	m_panel10->Layout();
+	bSizer9->Fit( m_panel10 );
+	sbSizer2->Add( m_panel10, 1, wxEXPAND | wxALL, 5 );
 
 
 	m_panel9->SetSizer( sbSizer2 );
