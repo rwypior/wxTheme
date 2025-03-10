@@ -6,17 +6,8 @@
 ///////////////////////////////////////////////////////////////////////////
 
 #include "wxt/label.h"
-#include "wxt/staticbox.h"
-#include "wxt/staticbox.h"
-#include "wxt/staticbox.h"
 #include "wxt/panel.h"
-#include "wxt/staticbox.h"
-#include "wxt/staticbox.h"
-#include "wxt/staticbox.h"
-
 #include "wxtexample.h"
-#include "wxt/staticbox.h"
-#include "wxt/staticbox.h"
 #include "wxt/staticbox.h"
 
 ///////////////////////////////////////////////////////////////////////////
@@ -100,9 +91,36 @@ mainwindow::mainwindow( wxWindow* parent, wxWindowID id, const wxString& title, 
 	wxBoxSizer* bSizer4;
 	bSizer4 = new wxBoxSizer( wxVERTICAL );
 
-	m_panel5 = new wxPanel( m_panel4, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+	m_panel5 = new wxt::Panel( m_panel4, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	wxStaticBoxSizer* sbSizer1;
 	sbSizer1 = new wxStaticBoxSizer( new wxt::StaticBox( m_panel5, wxID_ANY, _("label") ), wxVERTICAL );
+
+	m_panel11 = new wxt::Panel( sbSizer1->GetStaticBox(), wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+	wxBoxSizer* bSizer10;
+	bSizer10 = new wxBoxSizer( wxVERTICAL );
+
+	m_listCtrl1 = new wxt::List( m_panel11, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLC_LIST|wxLC_SINGLE_SEL );
+	bSizer10->Add( m_listCtrl1, 1, wxALL|wxEXPAND, 0 );
+
+
+	m_panel11->SetSizer( bSizer10 );
+	m_panel11->Layout();
+	bSizer10->Fit( m_panel11 );
+	sbSizer1->Add( m_panel11, 1, wxEXPAND | wxALL, 5 );
+
+	m_panel12 = new wxt::Panel( sbSizer1->GetStaticBox(), wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+	wxBoxSizer* bSizer11;
+	bSizer11 = new wxBoxSizer( wxVERTICAL );
+
+	m_treeListCtrl1 = new wxt::TreeList( m_panel12, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTL_DEFAULT_STYLE );
+
+	bSizer11->Add( m_treeListCtrl1, 1, wxEXPAND | wxALL, 5 );
+
+
+	m_panel12->SetSizer( bSizer11 );
+	m_panel12->Layout();
+	bSizer11->Fit( m_panel12 );
+	sbSizer1->Add( m_panel12, 1, wxEXPAND | wxALL, 5 );
 
 
 	m_panel5->SetSizer( sbSizer1 );
@@ -116,7 +134,11 @@ mainwindow::mainwindow( wxWindow* parent, wxWindowID id, const wxString& title, 
 	bSizer4->Fit( m_panel4 );
 	bSizer2->Add( m_panel4, 1, wxEXPAND | wxALL, 5 );
 
-	m_panel6 = new wxt::Panel( m_panel2, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+	m_panel14 = new wxt::Panel( m_panel2, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+	wxBoxSizer* bSizer13;
+	bSizer13 = new wxBoxSizer( wxVERTICAL );
+
+	m_panel6 = new wxt::Panel( m_panel14, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	wxBoxSizer* bSizer5;
 	bSizer5 = new wxBoxSizer( wxVERTICAL );
 
@@ -127,7 +149,26 @@ mainwindow::mainwindow( wxWindow* parent, wxWindowID id, const wxString& title, 
 	m_panel6->SetSizer( bSizer5 );
 	m_panel6->Layout();
 	bSizer5->Fit( m_panel6 );
-	bSizer2->Add( m_panel6, 1, wxEXPAND | wxALL, 5 );
+	bSizer13->Add( m_panel6, 1, wxEXPAND | wxALL, 5 );
+
+	m_panel13 = new wxPanel( m_panel14, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+	wxBoxSizer* bSizer12;
+	bSizer12 = new wxBoxSizer( wxVERTICAL );
+
+	m_dataViewTreeCtrl1 = new wxt::DataViewTreeCtrl( m_panel13, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxDV_NO_HEADER|wxDV_ROW_LINES );
+	bSizer12->Add( m_dataViewTreeCtrl1, 1, wxALL|wxEXPAND, 0 );
+
+
+	m_panel13->SetSizer( bSizer12 );
+	m_panel13->Layout();
+	bSizer12->Fit( m_panel13 );
+	bSizer13->Add( m_panel13, 1, wxEXPAND | wxALL, 5 );
+
+
+	m_panel14->SetSizer( bSizer13 );
+	m_panel14->Layout();
+	bSizer13->Fit( m_panel14 );
+	bSizer2->Add( m_panel14, 1, wxEXPAND | wxALL, 5 );
 
 
 	m_panel2->SetSizer( bSizer2 );

@@ -18,13 +18,17 @@ add_executable(wxThemeExample ${OPTIONS} "main.cpp" "wxtexample.h" "wxtexample.c
 set_property(TARGET wxThemeExample PROPERTY CXX_STANDARD 17)
 
 find_package(wxWidgets CONFIG REQUIRED COMPONENTS core base html propgrid xml aui)
-find_package(wxTheme CONFIG REQUIRED)
+find_package(wxTheme CONFIG)
 
 target_link_libraries(wxThemeExample PUBLIC wxTheme)
 target_link_libraries(wxThemeExample PUBLIC wx::core wx::base wx::html wx::propgrid wx::xml wx::aui)
 
-# Patch generated sources
-execute_process(COMMAND ${CMAKE_COMMAND} -DTARGET_FILE=${CMAKE_CURRENT_SOURCE_DIR}/wxtexample.cpp -P${WXT_PATCH_FBP})
+if(${wxTheme_FOUND})
+    # Patch generated sources
+    execute_process(COMMAND ${CMAKE_COMMAND} -DTARGET_FILE=${CMAKE_CURRENT_SOURCE_DIR}/wxtexample.cpp -P${WXT_PATCH_FBP})
+else()
+    message(WARNING "wxTheme is not installed. For automatic wxFormBuilder code patching to work, wxTheme must be installed in the system. Use 'sudo make install' to install it, and reconfigure CMake.")
+endif()
 
 # Copy DLLs to exe directory
 add_custom_command(TARGET wxThemeExample POST_BUILD

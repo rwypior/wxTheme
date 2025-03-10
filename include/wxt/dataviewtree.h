@@ -2,25 +2,13 @@
 
 #include "control.h"
 #include "theme.h"
+#include "renderers.h"
 
 #include <wx/treelist.h>
 #include <wx/dataview.h>
 
 namespace wxt
 {
-    class DataViewRenderer : public wxDataViewIconTextRenderer
-    {
-    public:
-        explicit DataViewRenderer(const wxString& varianttype = GetDefaultType(),
-            wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
-            int align = wxDVR_DEFAULT_ALIGNMENT);
-
-        virtual void RenderText(const wxString& text, int xOffset, wxRect cell, wxDC* dc, int state) override;
-
-    private:
-        wxString value;
-    };
-
     class DataViewTreeCtrl : public Control, public wxDataViewTreeCtrl
     {
     public:
@@ -37,6 +25,8 @@ namespace wxt
             const wxValidator& validator = wxDefaultValidator);
 
         virtual Selector getSelector() const override;
+
+        static DataViewRenderer* createRenderer();
 
     protected:
         void setup();

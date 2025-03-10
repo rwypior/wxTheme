@@ -137,7 +137,7 @@ namespace wxt
                 this->translateMenu(menu);
         }
 
-        if (this->GetHWND())
+        if (this->GetHandle())
         {
             this->Update();
             this->UpdateMenus();

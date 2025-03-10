@@ -19,7 +19,10 @@ namespace wxt{ class Label; }
 #include "wxt/staticline.h"
 #include "wxt/panel.h"
 #include "wxt/checkbox.h"
+#include "wxt/list.h"
+#include "wxt/treelist.h"
 #include "wxt/propertygrid.h"
+#include "wxt/dataviewtree.h"
 #include "wxt/menu.h"
 #include "wxt/dialog.h"
 #include <wx/string.h>
@@ -37,9 +40,12 @@ namespace wxt{ class Label; }
 #include <wx/sizer.h>
 #include <wx/panel.h>
 #include <wx/checkbox.h>
+#include <wx/listctrl.h>
+#include <wx/treelist.h>
 #include <wx/statbox.h>
 #include <wx/propgrid/propgrid.h>
 #include <wx/propgrid/advprops.h>
+#include <wx/dataview.h>
 #include <wx/menu.h>
 #include <wx/statusbr.h>
 #include <wx/frame.h>
@@ -83,9 +89,16 @@ class mainwindow : public wxt::Frame
 		wxt::Button* m_button1;
 		wxt::Checkbox* m_checkBox1;
 		wxt::Panel* m_panel4;
-		wxPanel* m_panel5;
+		wxt::Panel* m_panel5;
+		wxt::Panel* m_panel11;
+		wxt::List* m_listCtrl1;
+		wxt::Panel* m_panel12;
+		wxt::TreeList* m_treeListCtrl1;
+		wxt::Panel* m_panel14;
 		wxt::Panel* m_panel6;
 		wxt::PropertyGrid* m_propertyGrid1;
+		wxPanel* m_panel13;
+		wxt::DataViewTreeCtrl* m_dataViewTreeCtrl1;
 		wxt::MenuBar* m_menubar;
 		wxMenu* file;
 		wxMenu* edit;

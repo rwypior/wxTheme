@@ -2,9 +2,11 @@
 #include "wxt/menu.h"
 #include "wxt/utils.h"
 
-#include <dwmapi.h>
-
 #include <wx/artprov.h>
+
+#ifdef WXT_WINDOWS
+#   include <dwmapi.h>
+#endif
 
 namespace wxt
 {
@@ -115,12 +117,12 @@ namespace wxt
 
     Selector Frame::getDockPanelHeaderSelector() const
     {
-        return this->DockPanelHeaderType;
+        return this->dockPanelHeaderSelector;
     }
 
     Selector Frame::getDockPanelButtonSelector() const
     {
-        return this->DockPanelButtonType;
+        return this->dockPanelButtonSelector;
     }
 
     void Frame::processTheme()
@@ -206,17 +208,17 @@ namespace wxt
                 const wxRect rect(wxPoint(0, 0), globalRect.GetSize());
                 wxRect paneRect = pane.window->GetRect();
 
-                int titleHeight = wxSystemSettings::GetMetric(wxSYS_CAPTION_Y, pane.window);
+                int titleHeight = wxSystemSettings::GetMetric(wxSYS_CAPTION_Y);
                 wxPoint wtf = pane.window->GetClientAreaOrigin();
 
-                int captionHeight = wxSystemSettings::GetMetric(wxSYS_CAPTION_Y, pane.window);
-                int frameHeight = wxSystemSettings::GetMetric(wxSYS_FRAMESIZE_Y, pane.window) + 1;
+                int captionHeight = wxSystemSettings::GetMetric(wxSYS_CAPTION_Y);
+                int frameHeight = wxSystemSettings::GetMetric(wxSYS_FRAMESIZE_Y) + 1;
 
                 wxRect paneGlobalRect = paneRect;
-                paneGlobalRect.x -= wxSystemSettings::GetMetric(wxSYS_FRAMESIZE_X, pane.window);
-                paneGlobalRect.width += wxSystemSettings::GetMetric(wxSYS_FRAMESIZE_X, pane.window) * 2;
+                paneGlobalRect.x -= wxSystemSettings::GetMetric(wxSYS_FRAMESIZE_X);
+                paneGlobalRect.width += wxSystemSettings::GetMetric(wxSYS_FRAMESIZE_X) * 2;
                 paneGlobalRect.y -= captionHeight - frameHeight;
-                paneGlobalRect.height += wxSystemSettings::GetMetric(wxSYS_CAPTION_Y, pane.window) + wxSystemSettings::GetMetric(wxSYS_BORDER_Y, pane.window);
+                paneGlobalRect.height += wxSystemSettings::GetMetric(wxSYS_CAPTION_Y) + wxSystemSettings::GetMetric(wxSYS_BORDER_Y);
 
                 //int iconSpacingX = wxSystemSettings::GetMetric(wxSYS_ICONSPACING_X, pane.window);
                 //int iconWidth = wxSystemSettings::GetMetric(wxSYS_SMALLICON_X, pane.window);
@@ -238,11 +240,11 @@ namespace wxt
 
                 const wxString& caption = pane.caption;
                 wxSize textSize = dc->GetTextExtent(caption);
-                dc->DrawText(caption, wxPoint(paneRect.GetLeft() + wxSystemSettings::GetMetric(wxSYS_BORDER_X, pane.window), paneRect.GetTop() - titleHeight / 2 - textSize.y / 2));
+                dc->DrawText(caption, wxPoint(paneRect.GetLeft() + wxSystemSettings::GetMetric(wxSYS_BORDER_X), paneRect.GetTop() - titleHeight / 2 - textSize.y / 2));
 
-                int iconSpacingX = wxSystemSettings::GetMetric(wxSYS_ICONSPACING_X, pane.window);
-                int iconWidth = wxSystemSettings::GetMetric(wxSYS_SMALLICON_X, pane.window);
-                int iconHeight = wxSystemSettings::GetMetric(wxSYS_SMALLICON_Y, pane.window);
+                int iconSpacingX = wxSystemSettings::GetMetric(wxSYS_ICONSPACING_X);
+                int iconWidth = wxSystemSettings::GetMetric(wxSYS_SMALLICON_X);
+                int iconHeight = wxSystemSettings::GetMetric(wxSYS_SMALLICON_Y);
 
                 wxPoint mousePos = this->ScreenToClient(wxGetMousePosition());
 
@@ -386,6 +388,7 @@ namespace wxt
         return wxRect(0, 0, clientSize.x, clientPos.y);
     }
 
+#ifdef WXT_WINDOWS
     wxRect Dialog::getNcButtonRect(NcButton btn)
     {
         TITLEBARINFOEX ti{ 0 };
@@ -406,6 +409,7 @@ namespace wxt
         }
         return wxRect();
     }
+#endif
 
     wxPoint Dialog::getNcPoint(wxPoint pt)
     {

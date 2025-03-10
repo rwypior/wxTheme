@@ -2,6 +2,7 @@
 
 #include "theme.h"
 #include "control.h"
+#include "wxt/wxt.h"
 
 #include "wx/treelist.h"
 
@@ -25,6 +26,8 @@ namespace wxt
         virtual Selector getSelector() const override;
         Selector getSelectorHeader() const;
 
+        void initTheme();
+
     protected:
         void setup();
         void processTheme();
@@ -34,7 +37,9 @@ namespace wxt
 
         void eventNcPaint(wxNcPaintEvent& event);
 
+#ifdef WXT_WINDOWS
         void eventPaintHeader(wxPaintEvent& event);
+#endif
 
     private:
         Selector selector;

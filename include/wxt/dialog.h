@@ -122,13 +122,13 @@ namespace wxt
 #ifdef WXT_WINDOWS
         WXLRESULT MSWWindowProc(WXUINT message, WXWPARAM wParam, WXLPARAM lParam) override;
         void updateNc();
+        wxRect getNcButtonRect(NcButton btn);
 #endif
 
         wxRect getInnerClientRect() const;
         wxRect getOuterClientRect() const;
         wxRect getTitlebarRect() const;
 
-        wxRect getNcButtonRect(NcButton btn);
         wxPoint getNcPoint(wxPoint pt);
 
     protected:

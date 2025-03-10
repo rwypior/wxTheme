@@ -60,7 +60,8 @@ namespace wxt
         Theme& theme = Theme::getInstance();
         if (theme.isEnabled())
         {
-            this->paint(wxPaintDC(this));
+            wxPaintDC dc(this);
+            this->paint(dc);
             event.Skip();
         }
     }
@@ -70,7 +71,8 @@ namespace wxt
         Theme& theme = Theme::getInstance();
         if (theme.isEnabled())
         {
-            this->paint(wxWindowDC(this));
+            wxWindowDC dc(this);
+            this->paint(dc);
             event.Skip();
         }
     }

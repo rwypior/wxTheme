@@ -7,7 +7,7 @@ endif()
 
 add_definitions(-DUNICODE -D_UNICODE)
 
-project ("wxTheme")
+project ("wxTheme" CXX)
 add_library(wxTheme)
 add_library(wxTheme::wxTheme ALIAS wxTheme)
 

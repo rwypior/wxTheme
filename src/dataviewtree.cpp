@@ -1,4 +1,5 @@
 #include "wxt/dataviewtree.h"
+#include "wxt/renderers.h"
 
 #include "wx/wx.h"
 #include "wx/dataview.h"
@@ -23,28 +24,6 @@ namespace
 
 namespace wxt
 {
-    // Renderer
-
-    DataViewRenderer::DataViewRenderer(const wxString& varianttype, wxDataViewCellMode mode, int align)
-        : wxDataViewIconTextRenderer(varianttype, mode, align)
-    { }
-
-    void DataViewRenderer::RenderText(const wxString& text, int xOffset, wxRect cell, wxDC* dc, int state)
-    {
-        if (DataViewTreeCtrl* treectrl = dynamic_cast<DataViewTreeCtrl*>(this->GetOwner()->GetOwner()))
-        {
-            Theme& theme = Theme::getInstance();
-            if (theme.isEnabled())
-            {
-                if (auto color = theme.getTextColor(treectrl->getSelector()))
-                    dc->SetPen(wxPen(*color));
-            }
-        }
-        dc->DrawText(text, cell.GetTopLeft());
-    }
-
-    // Tree
-
     DataViewTreeCtrl::DataViewTreeCtrl()
         : wxDataViewTreeCtrl()
     {
@@ -72,7 +51,8 @@ namespace wxt
 
         this->defaultBackgroundColor = this->GetBackgroundColour();
         this->defaultTextColor = this->GetForegroundColour();
-        this->defaultAlternateRowColor = this->GetAlternateRowColour();
+        //this->defaultAlternateRowColor = this->GetAlternateRowColour();
+        this->defaultAlternateRowColor = this->GetBackgroundColour();
 
         Theme& theme = Theme::getInstance();
         if (theme.isEnabled())
@@ -84,6 +64,11 @@ namespace wxt
     Selector DataViewTreeCtrl::getSelector() const
     {
         return this->selector;
+    }
+
+    DataViewRenderer* DataViewTreeCtrl::createRenderer()
+    {
+        return new wxt::DataViewRenderer(wxt::DataViewRenderer::GetDefaultType(), wxDATAVIEW_CELL_INERT);
     }
 
     void DataViewTreeCtrl::processTheme()
@@ -112,7 +97,12 @@ namespace wxt
         {
             wxWindowDC dc(this);
 
+            int border = getWidgetBorder(*this);
+
             wxRect rect = this->GetClientRect();
+            rect.height += border;
+            rect.width += border;
+
             dc.SetBrush(*wxTRANSPARENT_BRUSH);
             dc.SetPen(wxPen(this->GetBackgroundColour(), 3));
             dc.DrawRectangle(rect);
@@ -134,8 +124,6 @@ namespace wxt
         wxRect rect = this->headerCtrl->GetClientRect();
 
         Theme::State state = Theme::State::Default;
-        if (this->headerCtrl->IsMouseInWindow())
-            state = Theme::State::Hover;
 
         if (auto bg = theme.getBackgroundColor(this->headerselector, state))
             dc.SetBrush(wxBrush(*bg));

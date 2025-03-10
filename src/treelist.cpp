@@ -1,5 +1,6 @@
 #include "wxt/treelist.h"
 #include "wxt/utils.h"
+#include "wxt/renderers.h"
 
 #include <wx/wx.h>
 #include <wx/dataview.h>
@@ -37,6 +38,35 @@ namespace wxt
         return this->selectorHeader;
     }
 
+    void TreeList::initTheme()
+    {
+        wxt::DataViewRenderer* renderer = new wxt::DataViewRenderer(wxt::DataViewRenderer::GetDefaultType(), wxDATAVIEW_CELL_INERT);
+
+        struct Column
+        {
+            wxString title;
+            int width;
+            wxAlignment align;
+        };
+
+        wxVector<Column> columns;
+
+        for (unsigned int i = 0; i < this->GetDataView()->GetColumnCount(); i++)
+        {
+            const auto col = this->GetDataView()->GetColumn(i);
+            Column cache{ col->GetTitle(), col->GetWidth(), col->GetAlignment() };
+            columns.push_back(cache);
+        }
+
+        this->ClearColumns();
+
+        size_t i = 0;
+        for (const auto& col : columns)
+        {
+            this->GetDataView()->AppendColumn(new wxDataViewColumn(col.title, renderer, i++, col.width, col.align));
+        }
+    }
+
     void TreeList::setup()
     {
         this->selector.type = TreeListType;
@@ -45,15 +75,19 @@ namespace wxt
         this->defaultBackgroundColor = this->GetBackgroundColour();
         this->defaultTextColor = this->GetForegroundColour();
 
+#ifdef WXT_WINDOWS
         auto& children = this->m_view->GenericGetHeader()->GetChildren();
         if (!children.IsEmpty())
         {
             this->headerCtrl = this->m_view->GenericGetHeader()->GetChildren()[0];
             this->headerCtrl->Bind(wxEVT_PAINT, &TreeList::eventPaintHeader, this);
         }
+#endif
 
         this->Bind(wxtEVT_THEME_CHANGED, &TreeList::eventThemeChanged, this);
         this->Bind(wxEVT_NC_PAINT, &TreeList::eventNcPaint, this);
+
+        this->initTheme();
 
         Theme& theme = Theme::getInstance();
         if (theme.isEnabled())
@@ -67,6 +101,21 @@ namespace wxt
         Theme& theme = Theme::getInstance();
         this->SetBackgroundColour(either(theme.getBackgroundColor(this->getSelector()), this->defaultBackgroundColor));
         this->SetForegroundColour(either(theme.getTextColor(this->getSelector()), this->defaultTextColor));
+
+        // Doesn't work
+        // ==============
+        //wxSystemSettings setts;
+
+        //auto headerBk = theme.getBackgroundColor(this->getSelectorHeader());
+
+        //wxItemAttr headerAttr;
+        ////headerAttr.SetBackgroundColour(headerBk ? *headerBk : setts.GetColour(wxSYS_COLOUR_LISTBOX));
+        //headerAttr.SetBackgroundColour(wxColour(255, 0, 0));
+        //
+        //this->GetDataView()->SetHeaderAttr(headerAttr);
+        //this->GetDataView()->Refresh();
+        //this->GetDataView()->Update();
+
     }
 
     void TreeList::eventThemeChanged(ThemeEvent& event)
@@ -89,6 +138,7 @@ namespace wxt
         }
     }
 
+#ifdef WXT_WINDOWS
     void TreeList::eventPaintHeader(wxPaintEvent& event)
     {
         Theme& theme = Theme::getInstance();
@@ -127,4 +177,5 @@ namespace wxt
             }
         }
     }
+#endif
 }

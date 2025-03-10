@@ -19,9 +19,9 @@ file(READ "${TARGET_FILE}" FILE_CONTENTS)
 string(REPLACE "wxStaticBox(" "wxt::StaticBox(" FILE_CONTENTS "${FILE_CONTENTS}")
 
 # Add includes
-if("${FILE_CONTENTS}" MATCHES "wxStaticBox")
+if("${FILE_CONTENTS}" MATCHES "wxStaticBox" AND NOT "${FILE_CONTENTS}" MATCHES "wxt/staticbox.h")
 	set(WXT_STATICBOX_INCLUDE "#include \"wxt/staticbox.h\"")
-	string(REGEX REPLACE "(#include [^\n]+\n)" "\\1${WXT_STATICBOX_INCLUDE}\n" FILE_CONTENTS "${FILE_CONTENTS}")
+	string(REGEX REPLACE "(#include [^\n]+\n)\n" "\\1${WXT_STATICBOX_INCLUDE}\n\n" FILE_CONTENTS "${FILE_CONTENTS}")
 endif()
 
 file(WRITE "${TARGET_FILE}" "${FILE_CONTENTS}")
