@@ -4,8 +4,10 @@
 namespace wxt
 {
     DataViewRenderer::DataViewRenderer(const wxString& varianttype, wxDataViewCellMode mode, int align)
-        : wxDataViewIconTextRenderer(varianttype, mode, align)
+        : wxDataViewCustomRenderer(varianttype, mode, align)
     {
+        SetMode(mode);
+        SetAlignment(align);
     }
 
     Control* DataViewRenderer::getWxtOwner()
@@ -26,46 +28,50 @@ namespace wxt
 
     bool DataViewRenderer::Render(wxRect rect, wxDC* dc, int state)
     {
+        auto text = this->value.GetText();
+        auto extent = dc->GetTextExtent(text);
+
         Theme& theme = Theme::getInstance();
         if (theme.isEnabled())
         {
-            auto owner = GetOwner();
-            auto owner2 = owner->GetOwner();
-            auto parent = owner2->GetParent();
-
             if (Control* control = getWxtOwner())
             {
-                dc->SetPen(*wxTRANSPARENT_PEN);
-
-                auto text = this->value.GetText();
-                auto extent = dc->GetTextExtent(text);
-
+                state = 0;
                 if (auto color = theme.getTextColor(control->getSelector()))
                     dc->SetTextForeground(*color);
-
-                RenderText(
-                    text,
-                    0,
-                    wxRect(extent).CentreIn(rect),
-                    dc,
-                    0);
-                return true;
             }
         }
 
-        return wxDataViewIconTextRenderer::Render(rect, dc, state);
+        RenderText(
+            text,
+            0,
+            wxRect(extent).CentreIn(rect),
+            dc,
+            state);
+
+        return true;
+    }
+
+    wxSize DataViewRenderer::GetSize() const
+    {
+        wxWindow* const dvc = GetView();
+
+        wxSize size = GetTextExtent(this->value.GetText());
+
+        const wxBitmapBundle& bb = this->value.GetBitmapBundle();
+        if (bb.IsOk())
+            size.x += bb.GetPreferredLogicalSizeFor(dvc).x + dvc->FromDIP(4);
+        return size;
     }
 
     bool DataViewRenderer::SetValue(const wxVariant& value)
     {
-        // Seems hacky, but passing value directly to parent function
-        // causes crash
         this->value << value;
-        return wxDataViewIconTextRenderer::SetValue(wxVariant(wxDataViewIconText{ this->value }));
+        return true;
     }
 
     bool DataViewRenderer::GetValue(wxVariant& value) const
     {
-        return wxDataViewIconTextRenderer::GetValue(value);
+        return false;
     }
 }

@@ -9,8 +9,11 @@
 
 namespace wxt
 {
-    class DataViewRenderer : public wxDataViewIconTextRenderer
+    class DataViewRenderer : public wxDataViewCustomRenderer
     {
+    public:
+        static wxString GetDefaultType() { return wxS("wxDataViewIconText"); }
+
     public:
         explicit DataViewRenderer(const wxString& varianttype = GetDefaultType(),
             wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
@@ -21,6 +24,7 @@ namespace wxt
         //virtual void RenderText(const wxString& text, int xOffset, wxRect cell, wxDC* dc, int state) override;
         virtual bool Render(wxRect rect, wxDC* dc, int state) override;
 
+        virtual wxSize GetSize() const override;
         virtual bool SetValue(const wxVariant& value) override;
         virtual bool GetValue(wxVariant& value) const override;
 
