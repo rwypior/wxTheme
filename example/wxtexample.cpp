@@ -8,11 +8,7 @@
 #include "wxt/label.h"
 #include "wxt/staticbox.h"
 #include "wxt/panel.h"
-#include "wxt/staticbox.h"
 #include "wxtexample.h"
-#include "wxt/staticbox.h"
-#include "wxt/staticbox.h"
-#include "wxt/staticbox.h"
 
 ///////////////////////////////////////////////////////////////////////////
 
