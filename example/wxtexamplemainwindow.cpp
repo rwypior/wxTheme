@@ -79,7 +79,6 @@ void wxtexamplemainwindow::reloadLanguageCombo()
 	auto languages = lang.getAvailableLanguages();
 
 	this->m_language_combo->Clear();
-	this->m_language_combo->Insert("English", this->m_language_combo->GetCount(), new wxStringClientData(""));
 	for (auto& language : languages)
 	{
 		this->m_language_combo->Insert(language.second, this->m_language_combo->GetCount(), new wxStringClientData(language.first));

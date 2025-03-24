@@ -88,25 +88,44 @@ namespace wxt
 	{
 		bool result = true;
 
-		if (!wxLocale::IsAvailable(language))
+		// Set locale and language
+		if (wxLocale::IsAvailable(language))
 		{
-			result = false;
-			language = wxLANGUAGE_ENGLISH;
-		}
+			wxTranslations::Set(nullptr); // Fixes possible crashes on AddCatalog
+			this->locale = std::make_unique<wxLocale>(language);
 
-		wxTranslations::Set(nullptr); // Fixes possible crashes on AddCatalog
-		this->locale = std::make_unique<wxLocale>(language);
+			for (const wxString& path : this->lookupPaths)
+			{
+				this->locale->AddCatalogLookupPathPrefix(path);
+			}
 		
-		for (const wxString& path : this->lookupPaths)
+			if (!this->locale->AddCatalog(catalog))
+				result = false;
+
+			if (!this->locale->IsOk())
+				result = false;
+		}
+		else
+			result = false;
+
+		// Locale unavailable, set only language
+		if (!result)
 		{
-			this->locale->AddCatalogLookupPathPrefix(path);
-		}
-		
-		if (!this->locale->AddCatalog(catalog))
-			result = false;
+			wxString languageName = wxLocale::GetLanguageName(language);
+			wxString defaultLocale = wxLocale::GetLanguageName(wxLocale::GetSystemLanguage());
 
-		if (!this->locale->IsOk())
-			result = false;
+			this->locale = std::make_unique<wxLocale>(languageName, wxEmptyString, defaultLocale);	
+	
+			for (const wxString& path : this->lookupPaths)
+			{
+				this->locale->AddCatalogLookupPathPrefix(path);
+			}
+
+			wxTranslations* translations = new wxTranslations();
+			translations->SetLanguage(static_cast<wxLanguage>(language));
+			result = translations->AddCatalog(catalog);
+			wxTranslations::Set(translations);
+		}
 
 		if (result && refresh)
 			this->refreshEverything();

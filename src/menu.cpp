@@ -8,12 +8,12 @@
 #   include <vsstyle.h>
 
 #   pragma comment(lib, "uxtheme.lib")
-#endif
 
 namespace
 {
     static HTHEME g_menuTheme = nullptr;
 }
+#endif
 
 namespace wxt
 {
