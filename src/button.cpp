@@ -141,22 +141,106 @@ namespace wxt
     }
 
     // Small button
+	SmallButton::SmallButton()
+	{
+        this->selector.type = SmallButtonType;
+	}
 
-    SmallButton::SmallButton(wxWindow* parent,
+	SmallButton::SmallButton(wxWindow* parent,
         wxWindowID id,
-        const wxString& label,
+        const wxBitmapBundle& bitmap,
         const wxPoint& pos,
         const wxSize& size,
         long style,
         const wxValidator& validator,
         const wxString& name)
-        : Button(parent, id, label, pos, size, style, validator, name)
-    {
+		: wxBitmapButton(parent, id, bitmap, pos, size, style, validator, name)
+	{
         this->selector.type = SmallButtonType;
-    }
-
+	}
+  
     Selector SmallButton::getSelector() const
     {
         return this->selector;
+    }    
+	
+	void SmallButton::DoSetToolTipText(const wxString& tip)
+    {
+        if (this->originalTooltip.empty())
+            this->originalTooltip = tip;
+
+        wxBitmapButton::DoSetToolTipText(translate(tip));
     }
+    
+    void SmallButton::processLanguage()
+    {
+        this->SetToolTip(translate(this->originalTooltip));
+    }
+
+    void SmallButton::eventPaint(wxPaintEvent& event)
+    {
+        Theme& theme = Theme::getInstance();
+        if (theme.isEnabled())
+        {
+            wxPaintDC dc(this);
+
+            Theme::State state = Theme::State::Default;
+            if (!this->IsEnabled())
+                state = Theme::State::Disabled;
+            else if (this->state & ButtonState::Pressed)
+                state = Theme::State::Pressed;
+            else if (this->state & ButtonState::Hover)
+                state = Theme::State::Hover;
+
+            auto backgroundColor = theme.getBackgroundColor(this->getSelector(), state);
+            auto borderColor = theme.getBorderColor(this->getSelector(), state);
+
+            if (backgroundColor)
+                dc.SetBrush(wxBrush(*backgroundColor));
+
+            if (borderColor)
+                dc.SetPen(wxPen(*borderColor));
+ 
+            wxSize size = dc.GetSize();
+ 			dc.DrawRectangle(size);
+
+            wxBitmap bmp = this->GetBitmap();
+            if (bmp.IsOk())
+            {
+                dc.DrawBitmap(bmp, this->GetRect().width / 2 - bmp.GetWidth() / 2, this->GetRect().height / 2 - bmp.GetHeight() / 2);
+            }
+        }
+        else
+            event.Skip();
+    }
+
+    void SmallButton::eventLmbDown(wxMouseEvent& event)
+    {
+        this->state |= ButtonState::Pressed;
+        event.Skip();
+    }
+
+    void SmallButton::eventLmbUp(wxMouseEvent& event)
+    {
+        this->state &= ~ButtonState::Pressed;
+        event.Skip();
+    }
+
+    void SmallButton::eventMouseHover(wxMouseEvent& event)
+    {
+        this->state |= ButtonState::Hover;
+        event.Skip();
+    }
+
+    void SmallButton::eventMouseLeave(wxMouseEvent& event)
+    {
+        this->state &= ~ButtonState::Hover;
+        event.Skip();
+    }
+
+    void SmallButton::eventLanguageChanged(LanguageEvent& event)
+    {
+        this->processLanguage();
+    }
+
 }

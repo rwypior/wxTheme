@@ -56,15 +56,24 @@ namespace wxt
         wxString originalTooltip;
     };
 
-    class SmallButton : public Button
+    class SmallButton : public Control, public wxBitmapButton
     {
     public:
         static constexpr char SmallButtonType[] = "smallbutton";
+		
+		enum class ButtonState
+        {
+            Normal = 0x00,
+            Pressed = 0x01,
+            Hover = 0x02
+        };
+
 
     public:
+		SmallButton();
         SmallButton(wxWindow* parent,
             wxWindowID id,
-            const wxString& label = wxEmptyString,
+            const wxBitmapBundle& bitmap,
             const wxPoint& pos = wxDefaultPosition,
             const wxSize& size = wxDefaultSize,
             long style = 0,
@@ -72,9 +81,32 @@ namespace wxt
             const wxString& name = wxASCII_STR(wxButtonNameStr));
 
         virtual Selector getSelector() const override;
+	
+	protected:
+        virtual void DoSetToolTipText(const wxString& tip) override;
+
+    private:
+        void processLanguage();
+
+        void eventPaint(wxPaintEvent& event);
+        void eventLmbDown(wxMouseEvent& event);
+        void eventLmbUp(wxMouseEvent& event);
+        void eventMouseHover(wxMouseEvent& event);
+        void eventMouseLeave(wxMouseEvent& event);
+        void eventLanguageChanged(LanguageEvent& event);
+
+    protected:
+        Selector selector;
+
+    private:
+        ButtonState state = ButtonState::Normal;
+
+        wxString originalTooltip;
+
     };
 }
 
 DEFINE_BITFIELD(wxt::Button::ButtonState);
+DEFINE_BITFIELD(wxt::SmallButton::ButtonState);
 
 #endif
