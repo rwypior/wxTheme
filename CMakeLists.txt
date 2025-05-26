@@ -7,11 +7,12 @@ endif()
 
 add_definitions(-DUNICODE -D_UNICODE)
 
+set(WXT_EXT_TERMINALCTRL OFF CACHE BOOL "Include styles for TerminalCtrl")
+set(CMAKE_DEBUG_POSTFIX "d")
+
 project ("wxTheme" CXX)
 add_library(wxTheme)
 add_library(wxTheme::wxTheme ALIAS wxTheme)
-
-set(WXT_EXT_TERMINALCTRL OFF CACHE BOOL "Include styles for TerminalCtrl")
 
 if(WXT_PLATFORM STREQUAL "windows")
     set(WXT_WINDOWS 1)
