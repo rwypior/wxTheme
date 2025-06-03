@@ -40,8 +40,6 @@ namespace wxt
 
     void TreeList::initTheme()
     {
-        wxt::DataViewRenderer* renderer = new wxt::DataViewRenderer(wxt::DataViewRenderer::GetDefaultType(), wxDATAVIEW_CELL_INERT);
-
         struct Column
         {
             wxString title;
@@ -58,11 +56,14 @@ namespace wxt
             columns.push_back(cache);
         }
 
-        this->ClearColumns();
+        this->GetDataView()->ClearColumns();
 
         size_t i = 0;
         for (const auto& col : columns)
         {
+            // wxWidgets destroys renderers for each column separately - needs a separate
+            // renderer for each column or it's gonna crash!
+            wxt::DataViewRenderer* renderer = new wxt::DataViewRenderer(wxt::DataViewRenderer::GetDefaultType(), wxDATAVIEW_CELL_INERT);
             this->GetDataView()->AppendColumn(new wxDataViewColumn(col.title, renderer, i++, col.width, col.align));
         }
     }
@@ -166,14 +167,19 @@ namespace wxt
 
             dc.DrawRectangle(rect);
 
-            if (this->m_view->GetColumnCount() > 0)
+            constexpr unsigned int offsetX = 3;
+            unsigned int x = offsetX + 2;
+            for (unsigned int i = 0; i < this->m_view->GetColumnCount(); i++)
             {
-                wxString label = this->m_view->GetColumn(0)->GetTitle();
+                auto column = this->m_view->GetColumn(i);
+                wxString label = column->GetTitle();
                 wxSize extent = dc.GetTextExtent(label);
 
                 if (auto color = theme.getTextColor(this->getSelectorHeader()))
                     dc.SetTextForeground(*color);
-                dc.DrawText(label, 8, rect.height / 2 - extent.GetHeight() / 2);
+                dc.DrawText(label, x, rect.height / 2 - extent.GetHeight() / 2);
+
+                x += column->GetWidth() + offsetX;
             }
         }
     }

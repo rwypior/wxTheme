@@ -157,6 +157,13 @@ namespace wxt
 		: wxBitmapButton(parent, id, bitmap, pos, size, style, validator, name)
 	{
         this->selector.type = SmallButtonType;
+
+        this->Bind(wxEVT_PAINT, &SmallButton::eventPaint, this);
+        this->Bind(wxEVT_LEFT_DOWN, &SmallButton::eventLmbDown, this);
+        this->Bind(wxEVT_LEFT_UP, &SmallButton::eventLmbUp, this);
+        this->Bind(wxEVT_ENTER_WINDOW, &SmallButton::eventMouseHover, this);
+        this->Bind(wxEVT_LEAVE_WINDOW, &SmallButton::eventMouseLeave, this);
+        this->Bind(wxtEVT_LANGUAGE_CHANGED, &SmallButton::eventLanguageChanged, this);
 	}
   
     Selector SmallButton::getSelector() const

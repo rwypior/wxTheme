@@ -28,12 +28,18 @@ wxtexamplemainwindow::wxtexamplemainwindow( wxWindow* parent )
 	this->m_listCtrl1->InsertItem(3, "Item 4");
 
 	this->m_treeListCtrl1->AppendColumn("Something");
-	this->m_treeListCtrl1->initTheme();
+	this->m_treeListCtrl1->AppendColumn("Another thing");
+
+	// Apparently calling this twice (first time in class' constructor)
+	// will cause unexpected behavior. Seems to work fine this way, but
+	// needs investigation
+	//this->m_treeListCtrl1->initTheme();
 
 	this->m_treeListCtrl1->AppendItem(this->m_treeListCtrl1->GetRootItem(), "Item A");
 	this->m_treeListCtrl1->AppendItem(this->m_treeListCtrl1->GetRootItem(), "Item B");
 	this->m_treeListCtrl1->AppendItem(this->m_treeListCtrl1->GetRootItem(), "Item C");
-	this->m_treeListCtrl1->AppendItem(this->m_treeListCtrl1->GetRootItem(), "Item D");
+	auto treeitemd = this->m_treeListCtrl1->AppendItem(this->m_treeListCtrl1->GetRootItem(), "Item D");
+	this->m_treeListCtrl1->SetItemText(treeitemd, 1, "blabla");
 
 	auto c1 = this->m_dataViewTreeCtrl1->AppendContainer(wxDataViewItem(0), "Container A");
 	auto c2 = this->m_dataViewTreeCtrl1->AppendContainer(wxDataViewItem(0), "Container B");
